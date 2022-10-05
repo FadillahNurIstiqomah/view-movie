@@ -2,12 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from './reportWebVitals'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import {Details} from './components/Details'
+import Homepage from './components/Homepage';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+     <Router>
+        <Routes>
+          <Route index element={<Homepage />}></Route>
+          <Route path=":id" element={<Details />}></Route>
+          {/* <Route path="movies/:type" element={<MovieList />}></Route>
+          <Route path="/*" element={<h1>Error Page</h1>}></Route> */}
+        </Routes>
+      </Router>
   </React.StrictMode>
 );
 
