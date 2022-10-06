@@ -1,13 +1,12 @@
 import React from "react"
 import '../App.css'
-import Homepage from "./Homepage"
 
 const HeaderNavbar = () => {
     return(
         <div>
             <div className="nav-area">
-                <nav class="navbar navbar-expand-lg text-white bg-transparant">
-                    <a class="navbar-brand" href={Homepage}><img src='https://movielist-react-app.netlify.app/static/media/Logo.eeba5c17ddf85f2145e83dd963662921.svg' alt=""/></a>
+                <nav className="navbar navbar-expand-lg text-white bg-transparant">
+                    <a className="navbar-brand" href='https://www.youtube.com/watch?v=aWzlQ2N6qqg'><img src='https://movielist-react-app.netlify.app/static/media/Logo.eeba5c17ddf85f2145e83dd963662921.svg' alt=""/></a>
                     <form>
                     <input 
                         className="form-control me-2 search-bar" 
@@ -22,12 +21,6 @@ const HeaderNavbar = () => {
                     <button className='button-login'>Login</button>
                     <button className='button-reg'>Register</button>
                     </div>
-                    {/* <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    </button> */}
-                    {/* <form class="form-inline my-2 my-lg-0 bg-transparant">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                    </form> */}
                 </nav>
             </div>
         </div>

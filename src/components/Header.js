@@ -12,7 +12,6 @@ const Header = () => {
     return (
       <div className="wrapper">
         <HeaderNavbar/>
-        {/* <div className="carousel-area"> */}
           <Carousel fade controls={false}>
             <Carousel.Item pause={true}>
               <img
@@ -64,7 +63,6 @@ const Header = () => {
             </Carousel.Item>
           </Carousel>
         </div>
-      // </div>
     )
 }
 

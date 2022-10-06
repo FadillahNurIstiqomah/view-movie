@@ -14,7 +14,7 @@ root.render(
      <Router>
         <Routes>
           <Route index element={<Homepage />}></Route>
-          <Route path=":id" element={<Details />}></Route>
+          <Route path="/movie/:id" element={<Details />}></Route>
           {/* <Route path="movies/:type" element={<MovieList />}></Route>
           <Route path="/*" element={<h1>Error Page</h1>}></Route> */}
         </Routes>
