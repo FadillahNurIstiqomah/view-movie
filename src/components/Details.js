@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 import '../App.css'
 import { useParams } from 'react-router-dom'
 import HeaderNavbar from './Navbar'
+import Footer from './Footer'
+import { DetailCast } from './DetailCast'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlay, faStar} from '@fortawesome/free-solid-svg-icons'
@@ -15,7 +17,6 @@ export const Details = () => {
 
     const getDetails = async () => {
         const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`);
-        console.log(res)
         let data = res.data
         setData(data)
     }
@@ -50,7 +51,9 @@ export const Details = () => {
                         </div>
                     </div>
                 </div>
-            }  
+            }
+            <DetailCast/>
+            <Footer/>
         </div>
     )
 }

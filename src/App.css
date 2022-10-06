@@ -161,3 +161,48 @@
     gap: 0.5rem;
     border: #0F1014 1px;
 }
+.cast_card{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    row-gap: 2rem;
+    padding: 0.5rem;
+    justify-content: center;
+}
+.img_cast{
+    width: 255px;
+    height: 400px;
+}
+
+/* Footer */
+.footer_style{
+    background-color: rgb(238, 241, 246);
+    padding: 4rem;
+}
+.logo_socmed{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.logo_socmed a{
+    text-decoration: none;
+    color: #e7394b;
+}
+.logo_socmed a:hover {
+    color: #e86a76;
+}
+.footer_text{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1rem;
+}
+.footer_text a{
+    text-decoration: none;
+    color: #0F1014;
+}
+.footer_text a:hover {
+    color: #e86a76;
+}
