@@ -28,7 +28,7 @@
     background-color: rgba(23, 20, 20, 0.52);
     width: 30rem;
     border-radius: 30px;
-    margin-left: 10rem;
+    margin-left: 12rem;
 }
 .search-result{
     padding: 1rem 4rem 3rem;
@@ -41,7 +41,7 @@
     border-color: #e7394b;
 }
 .navbar-right{
-    margin-left: 15rem;
+    margin-left: 17rem;
 }
 .button-login {
     background-color: rgba(23, 20, 20, 0.52);
@@ -115,7 +115,7 @@
     color: #e7394b;
     background: none;
     margin-top: 3rem;
-    margin-left: 62rem;
+    margin-left: 64rem;
     font-size: 1.2rem;
 }
 .btn-seeAll :hover{
