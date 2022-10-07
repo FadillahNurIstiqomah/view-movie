@@ -3,8 +3,9 @@ import '../App.css'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 // import { Swiper, SwiperSlide } from "swiper/react"
+// import "swiper/css"
+// import "swiper/css/pagination"
 import CastCard from './CastCard'
-// import CastCard from './CastCard'
 
 export const DetailCast = () => {
     const [data, setData] = useState()
@@ -13,18 +14,9 @@ export const DetailCast = () => {
 
     const getCast = async () => {
             const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`);
-            console.log(res)
             let data = res.data
             setData(data)
     }
-    // const getCast = async (event) => {
-    //     if (event) {
-    //         event.preventDefault()
-    //     }
-    
-    //     const {data} = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`)
-    //     setData(data.results[0])
-    //   }
     useEffect(() => {
         getCast()
       }, []);

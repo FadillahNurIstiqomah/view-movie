@@ -4,6 +4,8 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import "swiper/css/pagination"
 import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import '../App.css'
 import MovieCard from './MovieCard'
 import Header from "./Header"
@@ -34,7 +36,12 @@ export default function Homepage (){
   return (
     <div>
       <Header/>
-      <h3 className='popular'>Popular Movie</h3>
+      <div style={{display: 'flex'}}>
+        <h3 className='popular'>Popular Movie</h3>
+        <button className="btn-seeAll" onClick={() => navigate(`/movies`)}>
+          See All Movie <span><FontAwesomeIcon icon={faArrowRight}/></span>
+        </button>
+      </div>
       <Swiper
         slidesPerView={4}
         className="mySwiper"
@@ -50,14 +57,6 @@ export default function Homepage (){
           </SwiperSlide>
         ))}
       </Swiper>
-        {/* <div className='containers'>
-          {movies && movies.map(movie => (
-            <MovieCard
-                key={movie.id}
-                movie={movie}
-            />
-          ))}
-        </div> */}
       <Footer/>
     </div>
   );

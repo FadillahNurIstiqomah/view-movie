@@ -94,6 +94,20 @@
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
 }
+.popular-group{
+    justify-content: space-between;
+}
+.btn-seeAll{
+    border: none;
+    color: #e7394b;
+    background: none;
+    margin-top: 3rem;
+    margin-left: 65rem;
+    font-size: 1.2rem;
+}
+.btn-seeAll :hover{
+    color: #e86a76;
+}
 .swiper-list{
     margin-bottom: 4rem;
     margin-top: 2.5rem;
@@ -172,6 +186,22 @@
 .img_cast{
     width: 255px;
     height: 400px;
+}
+
+/* All Movies */
+.AllMovies-Text{
+    margin-top: 15rem;
+    margin-left: 4rem;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.All-movies{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+    column-gap: 2.5rem;
+    padding: 2rem;
+    justify-content: center;
 }
 
 /* Footer */

@@ -14,7 +14,6 @@ export const Details = () => {
     const API_KEY = "c368a12c060c2bbd33ea2c9aea9366e6"
     const IMAGE_PATH = `https://image.tmdb.org/t/p/original`
 
-
     const getDetails = async () => {
         const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`);
         let data = res.data
@@ -45,7 +44,7 @@ export const Details = () => {
                             <p>{Number(data.vote_average).toFixed(1)} / 10 </p>
                         </div>
                         <div>
-                            <a href = 'https://www.youtube.com/watch?v=up_tQrKSwnY'>
+                            <a href = {`https://www.youtube.com/results?search_query=${data.title}`}>
                                 <button className='button-watch'><span style={{marginRight: '0.5rem'}}><FontAwesomeIcon icon={faCirclePlay}/></span>WATCH TRAILER</button>
                             </a>
                         </div>
