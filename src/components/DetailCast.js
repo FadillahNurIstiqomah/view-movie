@@ -24,12 +24,14 @@ export const DetailCast = () => {
     return (
         <div>
             <h3 className='popular'>Cast</h3>
-            {data &&
-                <CastCard
-                    key={data.id}
-                    movie={data}
-                />
-            }
+            <div className='cast-gallery'>
+                {data &&
+                    <CastCard
+                        key={data.id}
+                        movie={data}
+                    />
+                }
+            </div>
             {/* <Swiper
                 slidesPerView={4}
                 className="mySwiper"

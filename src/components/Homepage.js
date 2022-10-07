@@ -37,7 +37,7 @@ export default function Homepage (){
     <div>
       <Header/>
       <div style={{display: 'flex'}}>
-        <h3 className='popular'>Popular Movie</h3>
+        <h4 className='popular'>Popular Movie</h4>
         <button className="btn-seeAll" onClick={() => navigate(`/movies`)}>
           See All Movie <span><FontAwesomeIcon icon={faArrowRight}/></span>
         </button>
@@ -45,7 +45,7 @@ export default function Homepage (){
       <Swiper
         slidesPerView={4}
         className="mySwiper"
-        style={{margin: '2rem 3rem 4rem 4rem'}}
+        style={{margin: '1rem 3rem 4rem 4rem'}}
       >
         {movies && movies.map(movie => (
           <SwiperSlide>

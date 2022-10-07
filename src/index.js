@@ -8,6 +8,7 @@ import {Details} from './components/Details'
 import Homepage from './components/Homepage'
 import { AllMovies } from './components/AllMovies';
 import Search from './components/Search';
+// import { CategoryPage } from './components/CategoryPage';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,6 +20,7 @@ root.render(
           <Route path="/movie/:id" element={<Details />}></Route>
           <Route path="/movies" element={<AllMovies />}></Route>
           <Route path="/search/:name" element={<Search />}></Route>
+          {/* <Route path="/genre/:name" element={<CategoryPage />}></Route> */}
           {/* <Route path="movies/:type" element={<MovieList />}></Route>
           <Route path="/*" element={<h1>Error Page</h1>}></Route> */}
         </Routes>
