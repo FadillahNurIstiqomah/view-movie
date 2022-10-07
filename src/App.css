@@ -7,7 +7,6 @@
     margin: 0 auto;
     padding: 0 15px;
 }
-
 /* CAROUSEL */
 .wrapper {
 	position: relative;
@@ -18,17 +17,31 @@
 	z-index: 2;
     margin: 1rem 2rem;
 }
+.icon-search{
+    margin-left: -3rem;
+    margin-top: 0.6rem;
+}
+.search_group{
+    display: flex;
+}
 .search-bar{
     background-color: rgba(23, 20, 20, 0.52);
     width: 30rem;
     border-radius: 30px;
-    margin-left: 15rem;
+    margin-left: 10rem;
+}
+.search-result{
+    padding: 1rem 4rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 20px;
+    column-gap: 20px;
 }
 .search-bar:hover {
     border-color: #e7394b;
 }
 .navbar-right{
-    margin-left: 15rem;
+    margin-left: 10rem;
 }
 .button-login {
     background-color: rgba(23, 20, 20, 0.52);
