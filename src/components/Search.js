@@ -13,7 +13,6 @@ export default function Search() {
     const handleChange = async (e) => {
         try {
             const res = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${name}`)
-            console.log(res.data.results)
             setSearch(res.data.results)
         } catch (error) {
             console.error(error)
