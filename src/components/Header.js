@@ -21,7 +21,7 @@ const Header = () => {
               />
               <Carousel.Caption>
                 <div className='containers caption text-start'>
-                  <h3 className='car-title'>Doctor Strange in the Multiverse of Madness</h3>
+                  <h3 className='car-title text-white'>Doctor Strange in the Multiverse of Madness</h3>
                   <p className='car-text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                   <a href="https://www.youtube.com/watch?v=aWzlQ2N6qqg">
                     <button className='button-watch'><span style={{marginRight: '0.5rem'}}><FontAwesomeIcon icon={faCirclePlay}/></span>WATCH TRAILER</button>
@@ -37,7 +37,7 @@ const Header = () => {
               />
               <Carousel.Caption>
                 <div className='containers caption text-start'>
-                  <h3 className='car-title'>Moon Knight</h3>
+                  <h3 className='car-title text-white'>Moon Knight</h3>
                   <p className='car-text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                   <a href="https://www.youtube.com/watch?v=x7Krla_UxRg">
                     <button className='button-watch'><span style={{marginRight: '0.5rem'}}><FontAwesomeIcon icon={faCirclePlay}/></span>WATCH TRAILER</button>
@@ -53,7 +53,7 @@ const Header = () => {
               />
               <Carousel.Caption>
                 <div className='containers caption text-start'>
-                  <h3 className='car-title'>Jurassic World Dominion</h3>
+                  <h3 className='car-title text-white'>Jurassic World Dominion</h3>
                   <p className='car-text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                   <a href="https://www.youtube.com/watch?v=fb5ELWi-ekk">
                     <button className='button-watch'><span style={{marginRight: '0.5rem'}}><FontAwesomeIcon icon={faCirclePlay}/></span>WATCH TRAILER</button>

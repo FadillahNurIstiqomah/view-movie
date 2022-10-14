@@ -28,7 +28,7 @@
     background-color: rgba(23, 20, 20, 0.52);
     width: 30rem;
     border-radius: 30px;
-    margin-left: 12rem;
+    margin-left: 10rem;
 }
 .search-result{
     padding: 1rem 4rem 3rem;
@@ -41,7 +41,7 @@
     border-color: #e7394b;
 }
 .navbar-right{
-    margin-left: 17rem;
+    margin-left: 12rem;
 }
 .button-login {
     background-color: rgba(23, 20, 20, 0.52);
@@ -66,6 +66,18 @@
 }
 .button-reg:hover{
     background-color: #e86a76;
+}
+.navbar-changed{
+    margin-left: 9rem;
+}
+.img-ava{
+    width: 2rem;
+    height: 2rem;
+}
+.name-ava{
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .button-watch {
     background-color: #e7394b;
@@ -115,7 +127,7 @@
     color: #e7394b;
     background: none;
     margin-top: 3rem;
-    margin-left: 64rem;
+    margin-left: 58rem;
     font-size: 1.2rem;
 }
 .btn-seeAll :hover{
