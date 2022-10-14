@@ -41,7 +41,7 @@
     border-color: #e7394b;
 }
 .navbar-right{
-    margin-left: 12rem;
+    margin-left: 17rem;
 }
 .button-login {
     background-color: rgba(23, 20, 20, 0.52);
@@ -68,11 +68,12 @@
     background-color: #e86a76;
 }
 .navbar-changed{
-    margin-left: 9rem;
+    margin-left: 12rem;
 }
 .img-ava{
     width: 2rem;
     height: 2rem;
+    border-radius: 100%;
 }
 .name-ava{
     font-size: 1rem;
