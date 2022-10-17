@@ -30,7 +30,7 @@ export const Details = () => {
                 <div>
                     <img src={IMAGE_PATH + data.backdrop_path} style={{width: '100%', height: '95vh'}} className='image-details' alt='gambar'></img>
                     <div className="text-detail">
-                        <h1>{data.title}</h1>
+                        <h1 className='text-white'>{data.title}</h1>
                         <div className='genre_item'>
                             {data.genres.map((e) => {
                                 return (
