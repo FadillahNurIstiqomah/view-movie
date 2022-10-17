@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faEnvelope, faUser} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate} from "react-router-dom"
 import { Button, Modal, Form, Input } from 'antd'
+import { GoogleLogin } from 'react-google-login'
+import { gapi } from 'gapi-script'
 import 'antd/dist/antd.css'
 import Swal from 'sweetalert2'
 import ava from '../img/profile_picture.png'
@@ -73,6 +75,20 @@ const HeaderNavbar = () => {
           }
         });
       };
+
+    //Oauth
+    const responseGoogle = (response) => {
+        console.log(response);
+        localStorage.setItem("token", response.accessToken)
+        setisLoginOpen(false);
+    };
+    gapi.load("client:auth2", () => {
+        gapi.auth2.init({
+            clientId:
+                "1088647031321-7t974eqjek1n0tjthtgmipfmjngkq451.apps.googleusercontent.com",
+            plugin_name: "",
+        });
+    });
 
     // Register
     const showRegister = () => setisRegisterOpen(true);
@@ -212,6 +228,13 @@ const HeaderNavbar = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </Form.Item>
+                                <GoogleLogin
+                                    clientId="1088647031321-7t974eqjek1n0tjthtgmipfmjngkq451.apps.googleusercontent.com"
+                                    buttonText="Login"
+                                    onSuccess={responseGoogle}
+                                    onFailure={responseGoogle}
+                                    cookiePolicy={'single_host_origin'}
+                                />
                             </Form>
                         </Modal>
 
