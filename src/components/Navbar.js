@@ -49,7 +49,11 @@ const HeaderNavbar = () => {
             setLogin(true);
             Swal.fire("Horeee!", "Login Berhasil!", "success")
         } catch (error) {
-            
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Email atau Password Salah!"
+            })
         }
     };
 
@@ -62,7 +66,6 @@ const HeaderNavbar = () => {
           denyButtonText: `No`,
         }).then((result) => {
           if (result.isConfirmed) {
-            // Swal.fire("Log Out Succes!", "", "success");
             setTimeout(function () {
               window.location.reload(1);
             }, 2000);
@@ -88,8 +91,8 @@ const HeaderNavbar = () => {
                 password_confirmation: passwordConf,
             });
             setisRegisterOpen(false);
-            // localStorage.setItem("user", JSON.stringify(res.data.data.token));
             Swal.fire("Horeee!", "Registrasi Berhasil!", "success")
+            window.location.reload();
         } catch (error) {
             Swal.fire({
                 icon: "error",
@@ -159,7 +162,7 @@ const HeaderNavbar = () => {
                             title="Log In to Your Account"
                             onCancel={handleCancelLogin}
                             footer={[
-                                <div>
+                                <div className="login_modal">
                                     <Button 
                                     htmlType="submit" 
                                     className="login-form-button text-white"
@@ -168,20 +171,23 @@ const HeaderNavbar = () => {
                                     >
                                     Login
                                     </Button>
-                                    <GoogleLogin
-                                    onSuccess={credentialResponse => {
-                                        localStorage.setItem("login_data", JSON.stringify(credentialResponse));
-                                        localStorage.setItem("user", JSON.stringify(credentialResponse.credential));
-                                        localStorage.setItem("image", JSON.stringify(''));
-                                        localStorage.setItem("first_name", JSON.stringify('Google User'));
-                                        setisLoginOpen(false);
-                                        setLogin(true);
-                                        setUser(credentialResponse);
-                                    }}
-                                    onError={() => {
-                                        console.log('Login Failed');
-                                    }}
-                                    />
+                                    <div className="google_login">
+                                        <GoogleLogin
+                                            onSuccess={credentialResponse => {
+                                                localStorage.setItem("login_data", JSON.stringify(credentialResponse));
+                                                localStorage.setItem("user", JSON.stringify(credentialResponse.credential));
+                                                localStorage.setItem("image", JSON.stringify(''));
+                                                localStorage.setItem("first_name", JSON.stringify('Google User'));
+                                                setisLoginOpen(false);
+                                                setLogin(true);
+                                                setUser(credentialResponse);
+                                                Swal.fire("Horeee!", "Login Berhasil!", "success")
+                                            }}
+                                            onError={() => {
+                                                console.log('Login Failed');
+                                            }}
+                                        />
+                                    </div>
                                 </div>
                             ]}
                         >
