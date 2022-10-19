@@ -6,7 +6,6 @@ import { faSearch, faEnvelope, faUser} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate} from "react-router-dom"
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { Button, Modal, Form, Input } from 'antd'
-// import { gapi } from 'gapi-script'
 import 'antd/dist/antd.css'
 import Swal from 'sweetalert2'
 import ava from '../img/profile_picture.png'
@@ -171,13 +170,13 @@ const HeaderNavbar = () => {
                                     </Button>
                                     <GoogleLogin
                                     onSuccess={credentialResponse => {
+                                        localStorage.setItem("login_data", JSON.stringify(credentialResponse));
+                                        localStorage.setItem("user", JSON.stringify(credentialResponse.credential));
+                                        localStorage.setItem("image", JSON.stringify(''));
+                                        localStorage.setItem("first_name", JSON.stringify('Google User'));
                                         setisLoginOpen(false);
                                         setLogin(true);
                                         setUser(credentialResponse);
-                                        localStorage.setItem("login_data", JSON.stringify(credentialResponse));
-                                        localStorage.setItem("user", JSON.stringify( credentialResponse.credential));
-                                        localStorage.setItem("image", JSON.stringify(''));
-                                        localStorage.setItem("first_name", JSON.stringify('Google User'));
                                     }}
                                     onError={() => {
                                         console.log('Login Failed');
