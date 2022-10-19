@@ -146,7 +146,7 @@ const HeaderNavbar = () => {
 
                             <h2 className="text-white name-ava">
                                 Halo, 
-                                {JSON.parse(first_name)}
+                                {JSON.parse(first_name) || JSON.parse(user.first_name)}
                                 {/* {JSON.parse(last_name)} */}
                             </h2>
                             <button className='button-reg' onClick={handleLogout}>Logout</button>
@@ -171,13 +171,13 @@ const HeaderNavbar = () => {
                                     </Button>
                                     <GoogleLogin
                                     onSuccess={credentialResponse => {
-                                        console.log(credentialResponse);
                                         setisLoginOpen(false);
                                         setLogin(true);
                                         setUser(credentialResponse);
-                                        localStorage.setItem('user', JSON.stringify({nickname: 'Google User', image: ''}))
-                                        localStorage.setItem('token', credentialResponse.credential)
                                         localStorage.setItem("login_data", JSON.stringify(credentialResponse));
+                                        localStorage.setItem("user", JSON.stringify( credentialResponse.credential));
+                                        localStorage.setItem("image", JSON.stringify(''));
+                                        localStorage.setItem("first_name", JSON.stringify('Google User'));
                                     }}
                                     onError={() => {
                                         console.log('Login Failed');
