@@ -4,9 +4,9 @@ import '../App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faEnvelope, faUser} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate} from "react-router-dom"
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { Button, Modal, Form, Input } from 'antd'
-import { GoogleLogin } from 'react-google-login'
-import { gapi } from 'gapi-script'
+// import { gapi } from 'gapi-script'
 import 'antd/dist/antd.css'
 import Swal from 'sweetalert2'
 import ava from '../img/profile_picture.png'
@@ -72,27 +72,8 @@ const HeaderNavbar = () => {
             Swal.fire("Log Out Failed!", "", "info");
           }
         });
-      };
-
-    //Oauth
-    const responseGoogle = (response) => {
-        console.log(response);
-        localStorage.setItem("login_data", JSON.stringify(response.profileObj));
-        localStorage.setItem("user", JSON.stringify(response.accessToken));
-        localStorage.setItem("image", JSON.stringify(response.profileObj.imageUrl));
-        localStorage.setItem("first_name", JSON.stringify(response.profileObj.name));
-        setisLoginOpen(false);
-        setLogin(true);
-        setUser(response.profileObj);
-        Swal.fire("Horeee!", "Login Berhasil!", "success")
     };
-    gapi.load("client:auth2", () => {
-        gapi.auth2.init({
-            clientId:
-                "1088647031321-7t974eqjek1n0tjthtgmipfmjngkq451.apps.googleusercontent.com",
-            plugin_name: "",
-        });
-    });
+    
 
     // Register
     const showRegister = () => setisRegisterOpen(true);
@@ -132,6 +113,7 @@ const HeaderNavbar = () => {
     }, [login]);
 
     return(
+    <GoogleOAuthProvider clientId='1088647031321-7t974eqjek1n0tjthtgmipfmjngkq451.apps.googleusercontent.com'>
         <div>
             <div className="nav-area">
                 <nav className="navbar navbar-expand-lg text-white bg-transparant">
@@ -152,9 +134,9 @@ const HeaderNavbar = () => {
                     {/* After Login */}
                     {token && login && token.length ? (
                         <div className="navbar-changed" style={{display: 'flex', gap: '1rem'}}>
-                            {user.image || user.imageUrl? (
+                            {user.image ? (
                                 <img
-                                    src={JSON.parse(image) || JSON.parse(user.imageUrl)}
+                                    src={JSON.parse(image)}
                                     alt=""
                                     className="img-ava"
                                 />
@@ -167,7 +149,6 @@ const HeaderNavbar = () => {
                                 {JSON.parse(first_name)}
                                 {/* {JSON.parse(last_name)} */}
                             </h2>
-
                             <button className='button-reg' onClick={handleLogout}>Logout</button>
                         </div>
                     ) : (
@@ -179,7 +160,7 @@ const HeaderNavbar = () => {
                             title="Log In to Your Account"
                             onCancel={handleCancelLogin}
                             footer={[
-                                <div className="login_modal">
+                                <div>
                                     <Button 
                                     htmlType="submit" 
                                     className="login-form-button text-white"
@@ -189,12 +170,18 @@ const HeaderNavbar = () => {
                                     Login
                                     </Button>
                                     <GoogleLogin
-                                    clientId="1088647031321-7t974eqjek1n0tjthtgmipfmjngkq451.apps.googleusercontent.com"
-                                    buttonText="Login with Google"
-                                    onSuccess={responseGoogle}
-                                    onFailure={responseGoogle}
-                                    cookiePolicy={'single_host_origin'}
-                                    className="google_login"
+                                    onSuccess={credentialResponse => {
+                                        console.log(credentialResponse);
+                                        setisLoginOpen(false);
+                                        setLogin(true);
+                                        setUser(credentialResponse);
+                                        localStorage.setItem('user', JSON.stringify({nickname: 'Google User', image: ''}))
+                                        localStorage.setItem('token', credentialResponse.credential)
+                                        localStorage.setItem("login_data", JSON.stringify(credentialResponse));
+                                    }}
+                                    onError={() => {
+                                        console.log('Login Failed');
+                                    }}
                                     />
                                 </div>
                             ]}
@@ -362,6 +349,7 @@ const HeaderNavbar = () => {
                 </nav>
             </div>
         </div>
+    </GoogleOAuthProvider>
     )
 }
 export default HeaderNavbar;
