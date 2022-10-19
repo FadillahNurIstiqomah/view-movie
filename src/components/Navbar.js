@@ -28,7 +28,6 @@ const HeaderNavbar = () => {
     let token = localStorage.getItem("user")
     let image = localStorage.getItem("image")
     let first_name = localStorage.getItem("first_name")
-    // let last_name = localStorage.getItem("last_name")
   
     // Login
     const showLogin = () =>setisLoginOpen(true);
@@ -45,7 +44,6 @@ const HeaderNavbar = () => {
             localStorage.setItem("user", JSON.stringify(res.data.data.token));
             localStorage.setItem("image", JSON.stringify(res.data.data.image));
             localStorage.setItem("first_name", JSON.stringify(res.data.data.first_name));
-            // localStorage.setItem("last_name", JSON.stringify(res.data.data.last_name));
             setEmail("");
             setPassword("");
             setisLoginOpen(false);
@@ -65,7 +63,7 @@ const HeaderNavbar = () => {
           denyButtonText: `No`,
         }).then((result) => {
           if (result.isConfirmed) {
-            Swal.fire("Log Out Succes!", "", "success");
+            // Swal.fire("Log Out Succes!", "", "success");
             setTimeout(function () {
               window.location.reload(1);
             }, 2000);
@@ -79,8 +77,14 @@ const HeaderNavbar = () => {
     //Oauth
     const responseGoogle = (response) => {
         console.log(response);
-        localStorage.setItem("token", response.accessToken)
+        localStorage.setItem("login_data", JSON.stringify(response.profileObj));
+        localStorage.setItem("user", JSON.stringify(response.accessToken));
+        localStorage.setItem("image", JSON.stringify(response.profileObj.imageUrl));
+        localStorage.setItem("first_name", JSON.stringify(response.profileObj.name));
         setisLoginOpen(false);
+        setLogin(true);
+        setUser(response.profileObj);
+        Swal.fire("Horeee!", "Login Berhasil!", "success")
     };
     gapi.load("client:auth2", () => {
         gapi.auth2.init({
@@ -148,9 +152,9 @@ const HeaderNavbar = () => {
                     {/* After Login */}
                     {token && login && token.length ? (
                         <div className="navbar-changed" style={{display: 'flex', gap: '1rem'}}>
-                            {user.image ? (
+                            {user.image || user.imageUrl? (
                                 <img
-                                    src={JSON.parse(image)}
+                                    src={JSON.parse(image) || JSON.parse(user.imageUrl)}
                                     alt=""
                                     className="img-ava"
                                 />
@@ -175,14 +179,24 @@ const HeaderNavbar = () => {
                             title="Log In to Your Account"
                             onCancel={handleCancelLogin}
                             footer={[
-                                <Button 
+                                <div className="login_modal">
+                                    <Button 
                                     htmlType="submit" 
                                     className="login-form-button text-white"
-                                    style={{backgroundColor:'#e7394b', marginRight:'26rem', marginBottom:'1rem',borderRadius: '30px'}}
+                                    style={{backgroundColor:'#e7394b', marginRight:'26rem', borderRadius: '30px', alignContent: 'center'}}
                                     onClick={handleSubmitLogin}
-                                >
-                                Login
-                              </Button>
+                                    >
+                                    Login
+                                    </Button>
+                                    <GoogleLogin
+                                    clientId="1088647031321-7t974eqjek1n0tjthtgmipfmjngkq451.apps.googleusercontent.com"
+                                    buttonText="Login with Google"
+                                    onSuccess={responseGoogle}
+                                    onFailure={responseGoogle}
+                                    cookiePolicy={'single_host_origin'}
+                                    className="google_login"
+                                    />
+                                </div>
                             ]}
                         >
                             <Form
@@ -228,13 +242,6 @@ const HeaderNavbar = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </Form.Item>
-                                <GoogleLogin
-                                    clientId="1088647031321-7t974eqjek1n0tjthtgmipfmjngkq451.apps.googleusercontent.com"
-                                    buttonText="Login"
-                                    onSuccess={responseGoogle}
-                                    onFailure={responseGoogle}
-                                    cookiePolicy={'single_host_origin'}
-                                />
                             </Form>
                         </Modal>
 

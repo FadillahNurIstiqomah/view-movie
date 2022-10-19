@@ -56,6 +56,14 @@
     color: #e86a76;
     border-color: #e86a76;
 }
+.login_modal{
+    display: flex;
+    margin: 1rem 0;
+}
+.google_login{
+    margin-left: -25rem;
+    margin-top: -0.5rem;
+}
 .button-reg {
     background-color: #e7394b;
     color: white;
