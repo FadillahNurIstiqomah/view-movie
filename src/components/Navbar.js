@@ -106,7 +106,7 @@ const HeaderNavbar = () => {
     //Dropdown Menu
     const menu = (
         <Menu
-            style={{width: '10rem', marginLeft:'20rem'}}
+            style={{width: '10rem', marginLeft:'19rem'}}
           items={[
             {
               label: <a onClick={handleLogout}>Logout</a>,
