@@ -6,7 +6,6 @@ import { faSearch, faEnvelope, faUser} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate} from "react-router-dom"
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { Button, Modal, Form, Input, Dropdown, Menu, Space } from 'antd'
-// import { Dropdown } from "react-bootstrap";
 import 'antd/dist/antd.css'
 import Swal from 'sweetalert2'
 import ava from '../img/profile_picture.png'
