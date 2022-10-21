@@ -121,10 +121,11 @@ const HeaderNavbar = () => {
                 <nav className="navbar navbar-expand-lg text-white bg-transparant">
                     {/* Logo */}
                     <a className="navbar-brand" href='https://movielist-react.vercel.app/'><img src='https://movielist-react-app.netlify.app/static/media/Logo.eeba5c17ddf85f2145e83dd963662921.svg' alt=""/></a>
+                    
                     {/* Search */}
                     <div className="search_group">
                         <input 
-                            className="form-control me-2 search-bar" 
+                            className="search-bar" 
                             type="text"
                             value={search.name} 
                             placeholder="What do you want to watch?" 
@@ -132,6 +133,16 @@ const HeaderNavbar = () => {
                         />
                         <FontAwesomeIcon onClick={submit} icon={faSearch} className='icon-search'/>
                     </div>
+                    {/* <div>
+                        <div className='search'>
+                            <input 
+                            value={search.name} 
+                            placeholder="What do you want to watch?" 
+                            onChange={(e) => setSearch(e.target.value)}
+                            className='me-2 search-bar' />
+                            <FontAwesomeIcon onClick={submit} icon={faSearch} style={{ fontSize: 15, color: '#FFFFFF' }} />
+                        </div>
+                    </div> */}
 
                     {/* After Login */}
                     {token && login && token.length ? (

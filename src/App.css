@@ -18,8 +18,9 @@
     margin: 1rem 2rem;
 }
 .icon-search{
-    margin-left: -3rem;
+    margin-left: -2rem;
     margin-top: 0.6rem;
+    filter: brightness(70%);
 }
 .search_group{
     display: flex;
@@ -29,6 +30,7 @@
     width: 30rem;
     border-radius: 30px;
     margin-left: 10rem;
+    padding: 0.3rem;
 }
 .search-result{
     padding: 1rem 4rem 3rem;
