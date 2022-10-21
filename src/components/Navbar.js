@@ -4,8 +4,9 @@ import '../App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faEnvelope, faUser} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate} from "react-router-dom"
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import { Button, Modal, Form, Input, Dropdown, Menu, Space } from 'antd'
+import jwt_decode from "jwt-decode";
 import 'antd/dist/antd.css'
 import Swal from 'sweetalert2'
 import ava from '../img/profile_picture.png'
@@ -105,7 +106,7 @@ const HeaderNavbar = () => {
     //Dropdown Menu
     const menu = (
         <Menu
-            style={{width: '10rem', marginLeft:'15rem'}}
+            style={{width: '10rem', marginLeft:'20rem'}}
           items={[
             {
               label: <a onClick={handleLogout}>Logout</a>,
@@ -154,9 +155,9 @@ const HeaderNavbar = () => {
                             <a onClick={(e) => e.preventDefault()}>
                                 <Space>
                                     <div className="navbar-changed" style={{display: 'flex', gap: '1rem'}}>
-                                        {user.image ? (
+                                        {user.image || user.picture ? (
                                             <img
-                                                src={JSON.parse(image)}
+                                                src={JSON.parse(image) || JSON.parse(user.picture)}
                                                 alt=""
                                                 className="img-ava"
                                             />
@@ -193,13 +194,15 @@ const HeaderNavbar = () => {
                                     <div className="google_login">
                                         <GoogleLogin
                                             onSuccess={credentialResponse => {
-                                                localStorage.setItem("login_data", JSON.stringify(credentialResponse));
+                                                var decoded = jwt_decode(credentialResponse.credential);
+                                                console.log(decoded)
+                                                localStorage.setItem("login_data", JSON.stringify(decoded));
                                                 localStorage.setItem("user", JSON.stringify(credentialResponse.credential));
-                                                localStorage.setItem("image", JSON.stringify(''));
-                                                localStorage.setItem("first_name", JSON.stringify('Google User'));
+                                                localStorage.setItem("image", JSON.stringify(decoded.picture));
+                                                localStorage.setItem("first_name", JSON.stringify(decoded.name));
                                                 setisLoginOpen(false);
                                                 setLogin(true);
-                                                setUser(credentialResponse);
+                                                setUser(decoded);
                                                 Swal.fire("Horeee!", "Login Berhasil!", "success")
                                             }}
                                             onError={() => {
