@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faEnvelope, faUser} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate} from "react-router-dom"
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import { Button, Modal, Form, Input } from 'antd'
+import { Button, Modal, Form, Input, Dropdown, Menu, Space } from 'antd'
+// import { Dropdown } from "react-bootstrap";
 import 'antd/dist/antd.css'
 import Swal from 'sweetalert2'
 import ava from '../img/profile_picture.png'
@@ -92,7 +93,7 @@ const HeaderNavbar = () => {
             });
             setisRegisterOpen(false);
             Swal.fire("Horeee!", "Registrasi Berhasil!", "success")
-            window.location.reload();
+            setisLoginOpen(true);
         } catch (error) {
             Swal.fire({
                 icon: "error",
@@ -102,6 +103,20 @@ const HeaderNavbar = () => {
         }
     };
 
+    //Dropdown Menu
+    const menu = (
+        <Menu
+            style={{width: '10rem', marginLeft:'15rem'}}
+          items={[
+            {
+              label: <a onClick={handleLogout}>Logout</a>,
+              key: '0',
+            },
+          ]}
+        />
+    );
+
+    //Search
     const submit = (e) => {
         navigate(`/search/${search}`)
     }
@@ -133,37 +148,31 @@ const HeaderNavbar = () => {
                         />
                         <FontAwesomeIcon onClick={submit} icon={faSearch} className='icon-search'/>
                     </div>
-                    {/* <div>
-                        <div className='search'>
-                            <input 
-                            value={search.name} 
-                            placeholder="What do you want to watch?" 
-                            onChange={(e) => setSearch(e.target.value)}
-                            className='me-2 search-bar' />
-                            <FontAwesomeIcon onClick={submit} icon={faSearch} style={{ fontSize: 15, color: '#FFFFFF' }} />
-                        </div>
-                    </div> */}
 
                     {/* After Login */}
                     {token && login && token.length ? (
-                        <div className="navbar-changed" style={{display: 'flex', gap: '1rem'}}>
-                            {user.image ? (
-                                <img
-                                    src={JSON.parse(image)}
-                                    alt=""
-                                    className="img-ava"
-                                />
-                            ): (
-                                <img src={ava} alt="" className="img-ava"/>
-                            )}
+                        <Dropdown overlay={menu} trigger={['click']}>
+                            <a onClick={(e) => e.preventDefault()}>
+                                <Space>
+                                    <div className="navbar-changed" style={{display: 'flex', gap: '1rem'}}>
+                                        {user.image ? (
+                                            <img
+                                                src={JSON.parse(image)}
+                                                alt=""
+                                                className="img-ava"
+                                            />
+                                        ): (
+                                            <img src={ava} alt="" className="img-ava"/>
+                                        )}
 
-                            <h2 className="text-white name-ava">
-                                Halo, 
-                                {JSON.parse(first_name) || JSON.parse(user.first_name)}
-                                {/* {JSON.parse(last_name)} */}
-                            </h2>
-                            <button className='button-reg' onClick={handleLogout}>Logout</button>
-                        </div>
+                                        <h2 className="text-white name-ava">
+                                            {JSON.parse(first_name) || JSON.parse(user.first_name)}
+                                            {/* {JSON.parse(last_name)} */}
+                                        </h2>
+                                    </div>
+                            </Space>
+                            </a>
+                        </Dropdown>
                     ) : (
                     // Login
                     <div className="navbar-right">
