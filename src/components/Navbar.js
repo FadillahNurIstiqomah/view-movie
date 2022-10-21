@@ -195,7 +195,6 @@ const HeaderNavbar = () => {
                                         <GoogleLogin
                                             onSuccess={credentialResponse => {
                                                 var decoded = jwt_decode(credentialResponse.credential);
-                                                console.log(decoded)
                                                 localStorage.setItem("login_data", JSON.stringify(decoded));
                                                 localStorage.setItem("user", JSON.stringify(credentialResponse.credential));
                                                 localStorage.setItem("image", JSON.stringify(decoded.picture));
