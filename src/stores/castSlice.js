@@ -2,15 +2,15 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-    details: [],
+    cast: [],
     loading: false,
   }
   
-  export const getMovieDetails = createAsyncThunk('movies/getDetails', async (id = false) => {
+  export const getMovieCast = createAsyncThunk('movies/getMovieCast', async (id = false) => {
     const API_KEY = "c368a12c060c2bbd33ea2c9aea9366e6"
     try{
-        const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`);
-        return res.data;
+        const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`);
+        return res.data.cast;
     } catch (error) {
         console.error(error);
     }
@@ -18,18 +18,18 @@ const initialState = {
   
   
   export const postSlice = createSlice({
-    name: 'movieDetails',
+    name: 'movieCast',
     initialState,
     reducers: {},
     extraReducers: {
-        [getMovieDetails.pending]: (state) => {
+        [getMovieCast.pending]: (state) => {
           state.loading = true
         },
-        [getMovieDetails.fulfilled]: (state, { payload }) => {
+        [getMovieCast.fulfilled]: (state, { payload }) => {
           state.loading = false
-          state.details = payload
+          state.cast = payload
         },
-        [getMovieDetails.rejected]: (state) => {
+        [getMovieCast.rejected]: (state) => {
           state.loading = false
         },
     },

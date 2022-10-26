@@ -9,7 +9,7 @@ const MovieCard = ({movie}) => {
         <div onClick={() => navigate(`/movie/${movie.id}`)} className={"movie"}>
             <div className="movie-title">
                 {movie.poster_path &&
-                <img src={IMAGE_PATH + movie.poster_path} alt={movie.title}/>
+                    <img src={IMAGE_PATH + movie.poster_path} alt={movie.title}/>
                 }
             </div>
         </div>

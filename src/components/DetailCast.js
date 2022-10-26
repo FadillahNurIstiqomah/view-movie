@@ -1,51 +1,58 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Card } from 'antd';
 import '../App.css'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
-// import { Swiper, SwiperSlide } from "swiper/react"
-// import "swiper/css"
-// import "swiper/css/pagination"
-import CastCard from './CastCard'
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
+import "swiper/css/pagination"
+import { getMovieCast } from '../stores/castSlice'
+
+const { Meta } = Card;
 
 export const DetailCast = () => {
-    const [data, setData] = useState()
-    let {id} = useParams()
-    const API_KEY = "c368a12c060c2bbd33ea2c9aea9366e6"
+    const IMAGE_PATH = "https://image.tmdb.org/t/p/w342"
+    const { id } = useParams();
+    const dispatch = useDispatch()
+    const {cast , loading } = useSelector((state) => state.movieCast)
 
-    const getCast = async () => {
-            const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`);
-            let data = res.data
-            setData(data)
-    }
     useEffect(() => {
-        getCast()
+        dispatch(getMovieCast(id))
       }, []);
+
+
+      if (loading) return <p>Loading...</p>
 
     return (
         <div>
             <h3 className='popular'>Cast</h3>
-            <div className='cast-gallery'>
-                {data &&
-                    <CastCard
-                        key={data.id}
-                        movie={data}
-                    />
-                }
-            </div>
-            {/* <Swiper
-                slidesPerView={4}
+            <Swiper
+                slidesPerView={5}
                 className="mySwiper"
-                style={{margin: '2rem 3rem 4rem 4rem'}}
+                style={{margin: '0 3rem 4rem 4rem'}}
             >
-                {data &&
-                    <SwiperSlide>
-                        <CastCard
-                            key={data.id}
-                            movie={data}
-                        />
-                    </SwiperSlide>
-                }
-            </Swiper> */}
+                {cast.map((movie) => {
+                    if (movie.profile_path !== null) {
+                        return (
+                            <SwiperSlide>
+                                <div className="movie-title">
+                                    {movie.profile_path &&
+                                        <Card
+                                            hoverable
+                                            style={{
+                                            width: 240,
+                                            }}
+                                            cover={<img alt={movie.name} src={IMAGE_PATH + movie.profile_path} />}
+                                        >
+                                            <Meta title={movie.name} description={movie.character} />
+                                        </Card>
+                                    }
+                                </div>
+                            </SwiperSlide>
+                        )
+                    }
+                })}
+            </Swiper>
         </div>
     )
 }

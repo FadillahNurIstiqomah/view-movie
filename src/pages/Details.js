@@ -29,13 +29,13 @@ export const Details = () => {
                     <img src={IMAGE_PATH + details.backdrop_path || details.profile_path} style={{width: '100%', height: '95vh'}} className='image-popular' alt='gambar'></img>
                     <div className="text-detail">
                         <h1 className='text-white'>{details.title}</h1>
-                        {/* <div className='genre_item'>
-                            {details.genres.map((e) => {
+                        <div className='genre_item'>
+                            {details.genres && details.genres.map((e) => {
                                 return (
                                     <p>{e.name}</p>
                                 )})
                             }
-                        </div> */}
+                        </div>
                         <p style={{width:'50%'}}>{details.overview}</p>
                         <div className="vote_average">
                             <FontAwesomeIcon icon={faStar} style={{fontSize: 20, color: '#e69b00'}}/>
