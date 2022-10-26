@@ -1,27 +1,22 @@
-import axios from 'axios'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
+import Footer from '../components/Footer'
 import { useNavigate, useParams } from 'react-router-dom'
-import HeaderNavbar from './Navbar'
+import { useDispatch, useSelector } from 'react-redux'
+import HeaderNavbar from '../components/Navbar'
+import { getSearch } from '../stores/searchSlice'
 
 export default function Search() {
-    const {name} = useParams()
-    const [search, setSearch] = useState([])
+    const { name } = useParams();
     const navigate = useNavigate()
-    const API_KEY = "c368a12c060c2bbd33ea2c9aea9366e6"
-    const IMAGE_PATH = "https://image.tmdb.org/t/p/w342"
-    
-    const handleChange = async (e) => {
-        try {
-            const res = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${name}`)
-            setSearch(res.data.results)
-        } catch (error) {
-            console.error(error)
-        }
-    };
+    const IMAGE_PATH = `https://image.tmdb.org/t/p/original`
+    const dispatch = useDispatch()
+    const {search , loading } = useSelector((state) => state.searchMovie)
 
     useEffect(() => {
-        handleChange()
+        dispatch(getSearch(name))
     }, [])
+
+    if (loading) return <p>Loading...</p>
 
     return(
         <div>
@@ -49,6 +44,7 @@ export default function Search() {
                         })}
                     </div>
                 </div>
+            <Footer/>
         </div>
     )
 }

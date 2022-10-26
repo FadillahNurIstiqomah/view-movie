@@ -43,7 +43,7 @@
     border-color: #e7394b;
 }
 .navbar-right{
-    margin-left: 16rem;
+    margin-left: 8rem;
 }
 .button-login {
     background-color: rgba(23, 20, 20, 0.52);
@@ -146,11 +146,26 @@
     color: #e7394b;
     background: none;
     margin-top: 3rem;
-    margin-left: 63rem;
+    margin-left: 59rem;
     font-size: 1.2rem;
 }
 .btn-seeAll :hover{
     color: #e86a76;
+}
+.genre_list{
+    width: 132px;
+    padding: 0.3rem;
+    background: transparent;
+    color: red;
+    font-size: 0.8rem;
+    border: 1px solid red;
+    border-radius: 30px;
+    cursor: pointer;
+}
+.genre_list:hover{
+    background: rgb(255, 129, 129);
+    border: 1px solid rgb(255, 129, 129);
+    color: white;
 }
 .swiper-list{
     margin-bottom: 4rem;

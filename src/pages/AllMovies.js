@@ -1,28 +1,23 @@
-import React, {useEffect, useState} from 'react'
-import axios from 'axios'
-import HeaderNavbar from './Navbar'
-import MovieCard from './MovieCard'
-import Footer from './Footer'
+import React, {useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {useNavigate} from "react-router-dom"
+import HeaderNavbar from '../components/Navbar'
+import MovieCard from '../components/MovieCard'
+import Footer from '../components/Footer'
+import { getMovies } from "../stores/movieSlice"
 
 export const AllMovies = () => {
-    const API_KEY = "c368a12c060c2bbd33ea2c9aea9366e6"
 
-    const [movies, setMovies] = useState([])
-    const [setMovie] = useState({title: "Loading Movies"})
-  
-    const fetchMovies = async (event) => {
-      if (event) {
-          event.preventDefault()
-      }
-  
-      const {data} = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US`)
-      setMovies(data.results)
-      setMovie(data.results[0])
-    }
+    const { movies, loading } = useSelector((state) => state.movies)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
   
     useEffect(()=>{
-     fetchMovies()
+        dispatch(getMovies())
     },[])
+
+    if (loading) return <p>Loading...</p>
+
     return (
         <div>
             <HeaderNavbar />
@@ -35,10 +30,11 @@ export const AllMovies = () => {
                 </div>
                 <h2 className='AllMovies-Text'>All Movies</h2>
                 <div className='All-movies'>
-                    {movies && movies.map(movie => (
+                    {movies.map((movie) => (
                         <MovieCard
-                            key={movie.id}
-                            movie={movie}
+                        key={movie._id}
+                        movie={movie}
+                        onClick={() => navigate(`/${movie.title}`)}
                         />
                     ))}
                 </div>
