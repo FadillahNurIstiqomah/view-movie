@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import HeaderNavbar from '../components/Navbar'
 import { getSearch } from '../stores/searchSlice'
+import MovieCard from '../components/MovieCard'
 
 export default function Search() {
     const { name } = useParams();
@@ -27,16 +28,14 @@ export default function Search() {
                     </div>
                     <h2 className='AllMovies-Text'>Search Result "{name}"</h2>
                     <div className='search-result'>
-                        {search && search.map((e) => {
-                            if (e.poster_path !== null) {
+                        {search && search.map((movie) => {
+                            if (movie.poster_path !== null) {
                                 return (
-                                    <div onClick={() => navigate(`/movie/${e.id}`)} className={"movie"}>
-                                        <div className="movie-title">
-                                            {e.poster_path &&
-                                            <img src={IMAGE_PATH + e.poster_path} alt={e.title}/>
-                                            }
-                                        </div>
-                                    </div>
+                                    <MovieCard
+                                        key={movie._id}
+                                        movie={movie}
+                                        onClick={() => navigate(`/${movie.title}`)}
+                                    />
                                 )
                             }
                         })}
