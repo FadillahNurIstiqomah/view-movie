@@ -39,6 +39,7 @@ const HeaderNavbar = () => {
     const handleSubmitLogin = async () => {
         dispatch(getLogin({email: email, password: password}))
         setisLoginOpen(false)
+        window.location.reload(1);
     };
 
     //Logout
@@ -172,7 +173,7 @@ const HeaderNavbar = () => {
                                                 setisLoginOpen(false);
                                                 setLogin(true);
                                                 setUser(credentialResponse);
-                                                Swal.fire("Horeee!", "Login Berhasil!", "success")
+                                                window.location.reload(1);
                                             }}
                                             onError={() => {
                                                 console.log('Login Failed');

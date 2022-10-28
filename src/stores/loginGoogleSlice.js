@@ -13,7 +13,6 @@ export const getLoginGoogle = createAsyncThunk('movies/getLoginGoogle', async (c
     localStorage.setItem("user", JSON.stringify(credentialResponse.credential));
     localStorage.setItem("image", JSON.stringify(decoded.picture));
     localStorage.setItem("first_name", JSON.stringify(decoded.name));
-    Swal.fire("Horeee!", "Login Berhasil!", "success")
 })
   
   
