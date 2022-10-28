@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import {useNavigate, Link} from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -16,7 +16,7 @@ import { getGenres } from "../stores/genreSlice"
 export default function Homepage (){
 
   const dispatch = useDispatch()
-  const { movies, loading } = useSelector((state) => state.movies)
+  const { movies } = useSelector((state) => state.movies)
   const { genres } = useSelector((state) => state.genres)
 
   const navigate = useNavigate()
@@ -26,8 +26,6 @@ export default function Homepage (){
     dispatch(getGenres())
   }, [])
 
-
-  if (loading) return <p>Loading...</p>
 
   return (
     <div>
@@ -73,7 +71,7 @@ export default function Homepage (){
                 </SwiperSlide>
             ))}
             </div>
-        </Swiper>
+      </Swiper>
       <Swiper
         slidesPerView={4}
         className="mySwiper"

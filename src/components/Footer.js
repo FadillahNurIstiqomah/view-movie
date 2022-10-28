@@ -1,10 +1,6 @@
-// import { Layout} from 'antd'
-
-
 const Footer = () => {
 
     return (
-        // <Footer style={{ textAlign: 'center' }}>Fadillah Nur ©2022 Created by Ant UED</Footer>
         <footer className="mt-5">
             <div className="text-center footer_style">
                 <div className="logo_socmed">

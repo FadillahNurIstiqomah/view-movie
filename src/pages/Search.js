@@ -10,13 +10,11 @@ export default function Search() {
     const navigate = useNavigate()
     const IMAGE_PATH = `https://image.tmdb.org/t/p/original`
     const dispatch = useDispatch()
-    const {search , loading } = useSelector((state) => state.searchMovie)
+    const {search} = useSelector((state) => state.searchMovie)
 
     useEffect(() => {
         dispatch(getSearch(name))
     }, [])
-
-    if (loading) return <p>Loading...</p>
 
     return(
         <div>

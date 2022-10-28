@@ -14,14 +14,11 @@ export const DetailCast = () => {
     const IMAGE_PATH = "https://image.tmdb.org/t/p/w342"
     const { id } = useParams();
     const dispatch = useDispatch()
-    const {cast , loading } = useSelector((state) => state.movieCast)
+    const {cast} = useSelector((state) => state.movieCast)
 
     useEffect(() => {
         dispatch(getMovieCast(id))
       }, []);
-
-
-      if (loading) return <p>Loading...</p>
 
     return (
         <div>

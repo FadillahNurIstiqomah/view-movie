@@ -8,15 +8,13 @@ import { getMovies } from "../stores/movieSlice"
 
 export const AllMovies = () => {
 
-    const { movies, loading } = useSelector((state) => state.movies)
+    const { movies } = useSelector((state) => state.movies)
     const dispatch = useDispatch()
     const navigate = useNavigate()
   
     useEffect(()=>{
         dispatch(getMovies())
     },[])
-
-    if (loading) return <p>Loading...</p>
 
     return (
         <div>
@@ -28,7 +26,6 @@ export const AllMovies = () => {
                         <h1 className='text-white'>All Movies</h1>
                     </div>
                 </div>
-                <h2 className='AllMovies-Text'>All Movies</h2>
                 <div className='All-movies'>
                     {movies.map((movie) => (
                         <MovieCard

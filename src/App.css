@@ -248,17 +248,11 @@
 }
 
 /* All Movies */
-.AllMovies-Text{
-    margin-top: 14rem;
-    margin-left: 4rem;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-}
 .All-movies{
     display: grid;
+    margin-top: 12rem;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     row-gap: 1rem;
-    column-gap: 2.5rem;
     padding: 2rem;
     justify-content: center;
 }
@@ -295,3 +289,29 @@
 .footer_text a:hover {
     color: #e86a76;
 }
+
+
+/* Card */
+.title {
+    width: 95%;
+    height: 10%;
+    position: absolute;
+    border-radius: 0 0 15px 15px;
+    padding: 15px;
+    visibility: hidden;
+    box-shadow: none;
+    opacity: 0;
+  }
+  
+  .ant-card-cover:hover .title {
+    height: 7rem;
+    bottom: 2.9rem;
+    left: 0px;
+    padding: 1rem;
+    background: rgb(27, 27, 27, 0.5);
+    opacity: 1;
+    visibility: visible;
+    transition: ease-in-out 0.7s;
+    border-radius: 0 0 15px 15px;
+    cursor: pointer;
+  }

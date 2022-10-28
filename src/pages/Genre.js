@@ -11,13 +11,11 @@ export default function Genres () {
   const {genre} = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { genrePage, loading } = useSelector((state) => state.genrePages)
+  const { genrePage } = useSelector((state) => state.genrePages)
 
   useEffect(() => {
     dispatch(getMovieGenre(genre))
   }, []);
-
-  if (loading) return <p>Loading...</p>
 
   return (
     <div>

@@ -13,13 +13,11 @@ export const Details = () => {
     const { id } = useParams();
     const IMAGE_PATH = `https://image.tmdb.org/t/p/original`
     const dispatch = useDispatch()
-    const {details , loading } = useSelector((state) => state.movieDetails)
+    const { details } = useSelector((state) => state.movieDetails)
 
     useEffect(() => {
         dispatch(getMovieDetails(id))
     }, [])
-
-    if (loading) return <p>Loading...</p>
 
     return (
         <div>
