@@ -7,19 +7,13 @@ const initialState = {
     loading: false,
   }
   
-  export const getRegister = createAsyncThunk('movies/getRegister', async (firstname, lastname, email, password, passwordConf) => {
-    console.log(firstname, lastname, email, password, passwordConf);
+  export const getRegister = createAsyncThunk('movies/getRegister', async (valueRegist) => {
+    console.log(valueRegist);
     try{
         const res = await axios.post("https://notflixtv.herokuapp.com/api/v1/users",
-            {
-                first_name: firstname,
-                last_name: lastname,
-                email: email,
-                password: password,
-                password_confirmation: passwordConf,
-            }
+        valueRegist
         );
-        localStorage.setItem("user", JSON.stringify(res.data.data.token));
+        
         Swal.fire("Horeee!", "Registrasi Berhasil!", "success")
     } catch (error) {
         Swal.fire({

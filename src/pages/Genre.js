@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import HeaderNavbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { getMovieGenre } from "../stores/genrePage"
+import { getGenres } from "../stores/genreSlice"
 import MovieCard from '../components/MovieCard'
 import '../App.css'
 
@@ -12,9 +13,11 @@ export default function Genres () {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { genrePage } = useSelector((state) => state.genrePages)
+  const { genres } = useSelector((state) => state.genres)
 
   useEffect(() => {
     dispatch(getMovieGenre(genre))
+    dispatch(getGenres())
   }, []);
 
   return (

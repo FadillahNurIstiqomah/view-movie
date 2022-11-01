@@ -7,19 +7,18 @@ const initialState = {
     loading: false,
   }
   
-  export const getLogin = createAsyncThunk('movies/getLogin', async (email, password) => {
-    console.log(email, password);
+  export const getLogin = createAsyncThunk('movies/getLogin', async (value) => {
     try{
         const res = await axios.post("https://notflixtv.herokuapp.com/api/v1/users/login",
-            {
-                email: email,
-                password: password,
-            });
-            
+            value  
+        );
         localStorage.setItem("login_data", JSON.stringify(res.data.data));
         localStorage.setItem("user", JSON.stringify(res.data.data.token));
         localStorage.setItem("image", JSON.stringify(res.data.data.image));
         localStorage.setItem("first_name", JSON.stringify(res.data.data.first_name));
+
+        Swal.fire("Horeee!", "Login Berhasil!", "success")
+        window.location.reload(1);
     } catch (error) {
         Swal.fire({
             icon: "error",

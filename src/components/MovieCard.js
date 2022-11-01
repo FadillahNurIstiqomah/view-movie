@@ -25,6 +25,7 @@ const MovieCard = ({movie}) => {
                         <FontAwesomeIcon icon={faStar} style={{fontSize: 20, color: '#e69b00'}}/>
                         <p>{Number(movie.vote_average).toFixed(1)} / 10 </p>
                     </div>
+                    <p>{movie.release_date}</p>
                 </div>
             </Card>
         </div>

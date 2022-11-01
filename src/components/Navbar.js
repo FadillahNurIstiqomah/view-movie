@@ -32,14 +32,26 @@ const HeaderNavbar = () => {
     let token = localStorage.getItem("user")
     let image = localStorage.getItem("image")
     let first_name = localStorage.getItem("first_name")
-  
+
+    const [value, setValue] = useState({
+        email: email,
+        password: password,
+    });
+    const [valueRegist, setValueRegist] = useState({
+        first_name: firstname,
+        last_name: lastname,
+        email: email,
+        password: password,
+        password_confirmation: passwordConf,
+    });
     // Login
     const showLogin = () =>setisLoginOpen(true);
     const handleCancelLogin = () => setisLoginOpen(false);
     const handleSubmitLogin = async () => {
-        dispatch(getLogin({email: email, password: password}))
+        dispatch(getLogin(value))
         setisLoginOpen(false)
-        window.location.reload(1);
+        setUser(value);
+        setLogin(true);
     };
 
     //Logout
@@ -66,16 +78,9 @@ const HeaderNavbar = () => {
     const showRegister = () => setisRegisterOpen(true);
     const handleCancelRegister = () => setisRegisterOpen(false);
     const handleSubmitRegister = async () => {
-        dispatch(getRegister(
-            {
-                firstname: firstname,
-                lastname: lastname,
-                email: email,
-                password: password,
-                passwordConf: passwordConf
-            }
-        ))
+        dispatch(getRegister(valueRegist))
         setisRegisterOpen(false)
+        setisLoginOpen(true);
     };
 
     //Dropdown Menu
@@ -207,7 +212,7 @@ const HeaderNavbar = () => {
                                         placeholder="Email Address" 
                                         style={{borderRadius: '30px'}}
                                         suffix={<FontAwesomeIcon icon={faEnvelope}/>}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        onChange={(e) => setValue({ ...value, email: e.target.value })}
                                     />
                                 </Form.Item>
 
@@ -223,7 +228,7 @@ const HeaderNavbar = () => {
                                     <Input.Password 
                                         placeholder="Password" 
                                         style={{borderRadius: '30px'}}
-                                        onChange={(e) => setPassword(e.target.value)}
+                                        onChange={(e) => setValue({ ...value, password: e.target.value })}
                                     />
                                 </Form.Item>
                             </Form>
@@ -266,7 +271,7 @@ const HeaderNavbar = () => {
                                         placeholder="First Name" 
                                         style={{borderRadius: '30px'}}
                                         suffix={<FontAwesomeIcon icon={faUser}/>}
-                                        onChange={(e) => setFirstname(e.target.value)}
+                                        onChange={(e) => setValueRegist({ ...valueRegist, first_name: e.target.value })}
                                     />
                                 </Form.Item>
                                 <Form.Item
@@ -282,7 +287,7 @@ const HeaderNavbar = () => {
                                         placeholder="Last Name" 
                                         style={{borderRadius: '30px'}}
                                         suffix={<FontAwesomeIcon icon={faUser}/>}
-                                        onChange={(e) => setLastname(e.target.value)}
+                                        onChange={(e) => setValueRegist({ ...valueRegist, last_name: e.target.value })}
                                     />
                                 </Form.Item>
                                 <Form.Item
@@ -302,7 +307,7 @@ const HeaderNavbar = () => {
                                         placeholder="Email Address" 
                                         style={{borderRadius: '30px'}}
                                         suffix={<FontAwesomeIcon icon={faEnvelope}/>}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        onChange={(e) => setValueRegist({ ...valueRegist, email: e.target.value })}
                                     />
                                 </Form.Item>
 
@@ -316,7 +321,7 @@ const HeaderNavbar = () => {
                                     ]}
                                     hasFeedback
                                 >
-                                    <Input.Password placeholder="Password" style={{borderRadius: '30px'}} onChange={(e) => setPassword(e.target.value)}/>
+                                    <Input.Password placeholder="Password" style={{borderRadius: '30px'}} onChange={(e) => setValueRegist({ ...valueRegist, password: e.target.value })}/>
                                 </Form.Item>
                                 <Form.Item
                                     name="confirm"
@@ -337,7 +342,7 @@ const HeaderNavbar = () => {
                                     }),
                                     ]}
                                 >
-                                    <Input.Password placeholder="Confirm Password" style={{borderRadius: '30px'}} onChange={(e) => setPasswordConf(e.target.value)}/>
+                                    <Input.Password placeholder="Confirm Password" style={{borderRadius: '30px'}} onChange={(e) => setValueRegist({ ...valueRegist, password_confirmation: e.target.value })}/>
                                 </Form.Item>
                             </Form>
                         </Modal>
