@@ -26,8 +26,7 @@ const auth = getAuth(app);
   export const getLogin = createAsyncThunk('movies/getLogin', async ({name, email, password}) => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
-      console.log("Login Success")
-      console.log(res)
+      
       localStorage.setItem("login_data", JSON.stringify(res.user.providerData));
       localStorage.setItem("user", JSON.stringify(res.user.accessToken));
       localStorage.setItem("image", JSON.stringify(res.user.providerData[0].photoURL));

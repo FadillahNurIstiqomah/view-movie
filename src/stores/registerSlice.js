@@ -33,7 +33,6 @@ const initialState = {
   export const getRegister = createAsyncThunk('movies/getRegister', async ({name, email, password}) => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(res)
       const user = res.user;
       await addDoc(collection(db, "users"), {
         uid: user.uid,

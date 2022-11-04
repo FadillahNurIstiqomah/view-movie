@@ -36,7 +36,6 @@ const googleProvider = new GoogleAuthProvider();
 export const getLoginGoogle = createAsyncThunk('movies/getLoginGoogle', async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
-    console.log(res)
     const user = res.user;
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
