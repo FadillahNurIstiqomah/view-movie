@@ -53,7 +53,7 @@ export default function Homepage (){
       </Swiper>
       <div style={{display: 'flex'}}>
         <h5 className='popular'>Browse by Category</h5>
-        <button className="btn-seeAll" onClick={() => navigate(`/movies`)} style={{marginLeft:'64rem'}}>
+        <button className="btn-seeAll" onClick={() => navigate(`/movies`)} style={{marginLeft:'58rem'}}>
           See All Movie <span><FontAwesomeIcon icon={faArrowRight}/></span>
         </button>
       </div>

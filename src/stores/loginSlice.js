@@ -1,30 +1,42 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import Swal from 'sweetalert2'
-import axios from "axios";
+import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const initialState = {
     login: [],
     loading: false,
-  }
-  
-  export const getLogin = createAsyncThunk('movies/getLogin', async (value) => {
-    try{
-        const res = await axios.post("https://notflixtv.herokuapp.com/api/v1/users/login",
-            value  
-        );
-        localStorage.setItem("login_data", JSON.stringify(res.data.data));
-        localStorage.setItem("user", JSON.stringify(res.data.data.token));
-        localStorage.setItem("image", JSON.stringify(res.data.data.image));
-        localStorage.setItem("first_name", JSON.stringify(res.data.data.first_name));
+}
 
-        Swal.fire("Horeee!", "Login Berhasil!", "success")
-        window.location.reload(1);
-    } catch (error) {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Email atau Password Salah!"
-        })
+const firebaseConfig = {
+  apiKey: "AIzaSyAe_AfgOJSLG157ZgEzeFIXgdOSis6SsTE",
+  authDomain: "login-3abdc.firebaseapp.com",
+  projectId: "login-3abdc",
+  storageBucket: "login-3abdc.appspot.com",
+  messagingSenderId: "975101696557",
+  appId: "1:975101696557:web:10c750f6ee4a4d915276a4",
+  measurementId: "G-CNKC0BL81D"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+  
+  export const getLogin = createAsyncThunk('movies/getLogin', async ({name, email, password}) => {
+    try {
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      console.log("Login Success")
+      console.log(res)
+      localStorage.setItem("login_data", JSON.stringify(res.user.providerData));
+      localStorage.setItem("user", JSON.stringify(res.user.accessToken));
+      localStorage.setItem("image", JSON.stringify(res.user.providerData[0].photoURL));
+      localStorage.setItem("displayName", JSON.stringify(res.user.providerData[0].displayName));
+
+      window.location.reload(1);
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
     }
 })
   

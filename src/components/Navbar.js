@@ -4,7 +4,6 @@ import '../App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faEnvelope, faUser} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate} from "react-router-dom"
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import { Button, Modal, Form, Input, Dropdown, Menu, Space } from 'antd'
 import 'antd/dist/antd.css'
 import Swal from 'sweetalert2'
@@ -18,40 +17,37 @@ const HeaderNavbar = () => {
     const [isLoginOpen, setisLoginOpen] = useState(false);
     const [isRegisterOpen, setisRegisterOpen] = useState(false);
     const [login, setLogin] = useState(false);
-    const [user, setUser] = useState();
+    const [user,setUser] = useState();
+    // const [user,  setUser, loading, error] = useAuthState(auth);
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [firstname, setFirstname] = useState("");
-    const [lastname, setLastname] = useState("");
-    const [passwordConf, setPasswordConf] = useState("");
+    const [name, setName] = useState("");
+    // const [lastname, setLastname] = useState("");
+    // const [passwordConf, setPasswordConf] = useState("");
 
     let token = localStorage.getItem("user")
     let image = localStorage.getItem("image")
-    let first_name = localStorage.getItem("first_name")
+    let displayName = localStorage.getItem("displayName")
 
-    const [value, setValue] = useState({
-        email: email,
-        password: password,
-    });
-    const [valueRegist, setValueRegist] = useState({
-        first_name: firstname,
-        last_name: lastname,
-        email: email,
-        password: password,
-        password_confirmation: passwordConf,
-    });
+    //Login Google
+    const signInWithGoogle = async () => {
+        dispatch(getLoginGoogle())
+        setisLoginOpen(false)
+        setLogin(true);
+        setUser(JSON.parse(localStorage.getItem("login_data")));
+    }
     // Login
     const showLogin = () =>setisLoginOpen(true);
     const handleCancelLogin = () => setisLoginOpen(false);
     const handleSubmitLogin = async () => {
-        dispatch(getLogin(value))
+        dispatch(getLogin({email, password}));
         setisLoginOpen(false)
-        setUser(value);
         setLogin(true);
+        setUser(JSON.parse(localStorage.getItem("login_data")));
     };
 
     //Logout
@@ -78,7 +74,7 @@ const HeaderNavbar = () => {
     const showRegister = () => setisRegisterOpen(true);
     const handleCancelRegister = () => setisRegisterOpen(false);
     const handleSubmitRegister = async () => {
-        dispatch(getRegister(valueRegist))
+        dispatch(getRegister({name, email, password}))
         setisRegisterOpen(false)
         setisLoginOpen(true);
     };
@@ -106,11 +102,11 @@ const HeaderNavbar = () => {
         setLogin(JSON.parse(localStorage.getItem("login_data")));
         setLogin(true);
         const user = JSON.parse(localStorage.getItem("login_data"));
-        setUser(user);
+        // setUser(user);
     }, [login]);
 
     return(
-    <GoogleOAuthProvider clientId='1088647031321-7t974eqjek1n0tjthtgmipfmjngkq451.apps.googleusercontent.com'>
+    // <GoogleOAuthProvider clientId='1088647031321-7t974eqjek1n0tjthtgmipfmjngkq451.apps.googleusercontent.com'>
         <div>
             <div className="nav-area">
                 <nav className="navbar navbar-expand-lg text-white bg-transparant">
@@ -135,18 +131,17 @@ const HeaderNavbar = () => {
                             <a onClick={(e) => e.preventDefault()}>
                                 <Space>
                                     <div className="navbar-changed" style={{display: 'flex', gap: '1rem'}}>
-                                        {user.image || user.picture ? (
+                                        {image !== null ? (
                                             <img
-                                                src={JSON.parse(image) || JSON.parse(user.picture)}
+                                                src={JSON.parse(image)}
                                                 alt=""
                                                 className="img-ava"
                                             />
-                                        ): (
+                                        ) : (
                                             <img src={ava} alt="" className="img-ava"/>
                                         )}
-
                                         <h2 className="text-white name-ava">
-                                            {JSON.parse(first_name) || JSON.parse(user.first_name)}
+                                            {JSON.parse(displayName)}
                                         </h2>
                                     </div>
                             </Space>
@@ -171,20 +166,15 @@ const HeaderNavbar = () => {
                                     >
                                     Login
                                     </Button>
-                                    <div className="google_login">
-                                        <GoogleLogin
-                                            onSuccess={(credentialResponse) => {
-                                                dispatch(getLoginGoogle(credentialResponse))
-                                                setisLoginOpen(false);
-                                                setLogin(true);
-                                                setUser(credentialResponse);
-                                                window.location.reload(1);
-                                            }}
-                                            onError={() => {
-                                                console.log('Login Failed');
-                                            }}
-                                        />
-                                    </div>
+                                    <Button
+                                    type="submit"
+                                    onClick={signInWithGoogle}
+                                    htmlType="submit" 
+                                    className="login-form-button text-white"
+                                    style={{backgroundColor:'#e7394b', marginLeft:'-25.5rem', borderRadius: '30px', alignContent: 'center'}}
+                                    >
+                                    Login with Google
+                                    </Button>
                                 </div>
                             ]}
                         >
@@ -212,7 +202,7 @@ const HeaderNavbar = () => {
                                         placeholder="Email Address" 
                                         style={{borderRadius: '30px'}}
                                         suffix={<FontAwesomeIcon icon={faEnvelope}/>}
-                                        onChange={(e) => setValue({ ...value, email: e.target.value })}
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </Form.Item>
 
@@ -228,7 +218,7 @@ const HeaderNavbar = () => {
                                     <Input.Password 
                                         placeholder="Password" 
                                         style={{borderRadius: '30px'}}
-                                        onChange={(e) => setValue({ ...value, password: e.target.value })}
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </Form.Item>
                             </Form>
@@ -259,7 +249,7 @@ const HeaderNavbar = () => {
                                 style={{marginBottom:'-2rem'}}
                                 >
                                 <Form.Item
-                                    name="firstname"
+                                    name="name"
                                     rules={[
                                     {
                                         required: true,
@@ -268,13 +258,13 @@ const HeaderNavbar = () => {
                                     ]}
                                 >
                                     <Input 
-                                        placeholder="First Name" 
+                                        placeholder="Name" 
                                         style={{borderRadius: '30px'}}
                                         suffix={<FontAwesomeIcon icon={faUser}/>}
-                                        onChange={(e) => setValueRegist({ ...valueRegist, first_name: e.target.value })}
+                                        onChange={(e) => setName(e.target.value)}
                                     />
                                 </Form.Item>
-                                <Form.Item
+                                {/* <Form.Item
                                     name="lastname"
                                     rules={[
                                     {
@@ -289,7 +279,7 @@ const HeaderNavbar = () => {
                                         suffix={<FontAwesomeIcon icon={faUser}/>}
                                         onChange={(e) => setValueRegist({ ...valueRegist, last_name: e.target.value })}
                                     />
-                                </Form.Item>
+                                </Form.Item> */}
                                 <Form.Item
                                     name="email"
                                     rules={[
@@ -307,7 +297,7 @@ const HeaderNavbar = () => {
                                         placeholder="Email Address" 
                                         style={{borderRadius: '30px'}}
                                         suffix={<FontAwesomeIcon icon={faEnvelope}/>}
-                                        onChange={(e) => setValueRegist({ ...valueRegist, email: e.target.value })}
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </Form.Item>
 
@@ -321,9 +311,9 @@ const HeaderNavbar = () => {
                                     ]}
                                     hasFeedback
                                 >
-                                    <Input.Password placeholder="Password" style={{borderRadius: '30px'}} onChange={(e) => setValueRegist({ ...valueRegist, password: e.target.value })}/>
+                                    <Input.Password placeholder="Password" style={{borderRadius: '30px'}} onChange={(e) => setPassword(e.target.value)}/>
                                 </Form.Item>
-                                <Form.Item
+                                {/* <Form.Item
                                     name="confirm"
                                     dependencies={['password']}
                                     hasFeedback
@@ -343,7 +333,7 @@ const HeaderNavbar = () => {
                                     ]}
                                 >
                                     <Input.Password placeholder="Confirm Password" style={{borderRadius: '30px'}} onChange={(e) => setValueRegist({ ...valueRegist, password_confirmation: e.target.value })}/>
-                                </Form.Item>
+                                </Form.Item> */}
                             </Form>
                         </Modal>
                     </div>
@@ -351,7 +341,7 @@ const HeaderNavbar = () => {
                 </nav>
             </div>
         </div>
-    </GoogleOAuthProvider>
+    // </GoogleOAuthProvider>
     )
 }
 export default HeaderNavbar;

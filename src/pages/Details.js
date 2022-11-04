@@ -24,7 +24,7 @@ export const Details = () => {
             <HeaderNavbar/>
             {details&&
                 <div>
-                    <img src={IMAGE_PATH + details.backdrop_path || details.profile_path} style={{width: '100%', height: '95vh'}} className='image-popular' alt='gambar'></img>
+                    <img src={IMAGE_PATH + details.backdrop_path || details.profile_path} style={{width: '100%', height: '95vh'}} className='image-popular' alt={details.title}></img>
                     <div className="text-detail">
                         <h1 className='text-white'>{details.title}</h1>
                         <div className='genre_item'>

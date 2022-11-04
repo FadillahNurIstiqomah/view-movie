@@ -15,7 +15,7 @@
 .nav-area {
 	position: absolute;
 	z-index: 2;
-    	margin: 1rem 2rem;
+    margin: 1rem 2rem;
 }
 .icon-search{
     margin-left: -2rem;
@@ -43,7 +43,7 @@
     border-color: #e7394b;
 }
 .navbar-right{
-    margin-left: 13rem;
+    margin-left: 8rem;
 }
 .button-login {
     background-color: rgba(23, 20, 20, 0.52);
@@ -78,7 +78,7 @@
     background-color: #e86a76;
 }
 .navbar-changed{
-    margin-left: 19rem;
+    margin-left: 14rem;
 }
 .img-ava{
     width: 2rem;
@@ -146,7 +146,7 @@
     color: #e7394b;
     background: none;
     margin-top: 3rem;
-    margin-left: 66rem;
+    margin-left: 60rem;
     font-size: 1.2rem;
 }
 .btn-seeAll :hover{
