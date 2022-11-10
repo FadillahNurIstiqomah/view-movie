@@ -8,6 +8,7 @@ import { Button, Modal, Form, Input, Dropdown, Menu, Space } from 'antd'
 import 'antd/dist/antd.css'
 import Swal from 'sweetalert2'
 import ava from '../img/profile_picture.png'
+import logo from '../img/logo.png'
 import { getLogin } from "../stores/loginSlice"
 import { getRegister } from "../stores/registerSlice"
 import { getLoginGoogle } from "../stores/loginGoogleSlice"
@@ -114,7 +115,7 @@ const HeaderNavbar = () => {
                     <a className="navbar-brand" href='https://movielist-react.vercel.app/'><img src='https://movielist-react-app.netlify.app/static/media/Logo.eeba5c17ddf85f2145e83dd963662921.svg' alt=""/></a>
                     
                     {/* Search */}
-                    <div className="search_group">
+                    {/* <div className="search_group">
                         <input 
                             className="search-bar" 
                             type="text"
@@ -123,7 +124,7 @@ const HeaderNavbar = () => {
                             onChange={(e) => setSearch(e.target.value)}
                         />
                         <FontAwesomeIcon onClick={submit} icon={faSearch} className='icon-search'/>
-                    </div>
+                    </div> */}
 
                     {/* After Login */}
                     {token && login && token.length ? (
@@ -150,6 +151,10 @@ const HeaderNavbar = () => {
                     ) : (
                     // Login
                     <div className="navbar-right">
+                        <button className='button-search' onClick={() => navigate(`/movies`)}>Search
+                        <FontAwesomeIcon style={{marginLeft:'0.5rem'}} icon={faSearch}/>
+                        </button>
+
                         <button className='button-login' onClick={showLogin}>Login</button>
                         <Modal
                             open={isLoginOpen}
@@ -225,7 +230,7 @@ const HeaderNavbar = () => {
                         </Modal>
 
                         {/* Register */}
-                        <button className='button-reg' onClick={showRegister}>Register</button>
+                        {/* <button className='button-reg' onClick={showRegister}>Register</button> */}
                         <Modal
                             open={isRegisterOpen}
                             title="Create Account"

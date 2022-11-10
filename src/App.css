@@ -10,18 +10,14 @@
 /* CAROUSEL */
 .wrapper {
 	position: relative;
-	height: 100vh;
+	height: 85vh;
 }
 .nav-area {
 	position: absolute;
 	z-index: 2;
     margin: 1rem 2rem;
 }
-.icon-search{
-    margin-left: -2rem;
-    margin-top: 0.6rem;
-    filter: brightness(70%);
-}
+
 .search_group{
     display: flex;
 }
@@ -31,6 +27,15 @@
     border-radius: 30px;
     margin-left: 15rem;
     padding: 0.3rem;
+}
+.button-search{
+     background-color: transparent;
+    border-radius: 30px;
+    color: white;
+    padding: 0.5rem;
+    width: 7rem;
+    border: none;
+    /* margin-right: 1rem; */
 }
 .search-result{
     padding: 1rem 4rem 3rem;
@@ -43,20 +48,19 @@
     border-color: #e7394b;
 }
 .navbar-right{
-    margin-left: 13rem;
+    margin-left: 51rem;
 }
 .button-login {
-    background-color: rgba(23, 20, 20, 0.52);
+    background-color: rgba(61, 61, 61, 0.52);
     border-radius: 30px;
-    color: #e7394b;
+    color: white;
     padding: 0.5rem;
     width: 7rem;
-    border-color: #e7394b;
-    margin-right: 1rem;
+    border: none;
 }
 .button-login:hover{
-    color: #e86a76;
-    border-color: #e86a76;
+    color: black;
+    background-color:#deb887;
 }
 .login_modal{
     display: flex;
@@ -116,20 +120,15 @@
     margin-left: -10rem;
     width: 50rem;
 }
-.car-title {
-    font-size: 3.5rem;
+.carousel-title {
+    font-size: 3rem;
     font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 0.3rem;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-.car-text {
-    font-size: 1.2rem;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-bottom: 2rem;
-    margin-top: 1.5rem;
-}
-
 .img-carousel {
-    height: 100vh;
+    height: 80vh;
+    width: 100%;
     filter: brightness(50%);
 }
 .popular {
@@ -143,29 +142,26 @@
 }
 .btn-seeAll{
     border: none;
-    color: #e7394b;
+    color: white;
     background: none;
     margin-top: 3rem;
-    margin-left: 66rem;
+    margin-left: 60rem;
     font-size: 1.2rem;
-}
-.btn-seeAll :hover{
-    color: #e86a76;
 }
 .genre_list{
     width: 132px;
     padding: 0.3rem;
     background: transparent;
-    color: red;
+    color: white;
     font-size: 0.8rem;
-    border: 1px solid red;
+    border: 1px solid white;
     border-radius: 30px;
     cursor: pointer;
 }
 .genre_list:hover{
-    background: rgb(255, 129, 129);
-    border: 1px solid rgb(255, 129, 129);
-    color: white;
+    background: white;
+    border: 1px solid gray;
+    color: black;
 }
 .swiper-list{
     margin-bottom: 4rem;
@@ -194,7 +190,7 @@
 }
 
 .movie img {
-    height: 450px;
+    height: 300px;
     max-width: 100%;
     border-radius: 5%;
 }
@@ -277,23 +273,24 @@
 
 .logo_socmed a{
     text-decoration: none;
-    color: #e7394b;
+    color: white;
 }
 .logo_socmed a:hover {
-    color: #e86a76;
+    color: burlywood;
 }
 .footer_text{
     display: flex;
     justify-content: center;
+    color: white;
     gap: 2rem;
     margin: 1rem;
 }
 .footer_text a{
     text-decoration: none;
-    color: #0F1014;
+    color: white;
 }
 .footer_text a:hover {
-    color: #e86a76;
+    color: burlywood;
 }
 
 

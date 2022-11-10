@@ -2,11 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-    movies: [],
+    nowplaying: [],
     loading: false,
   }
   
-  export const getMovies = createAsyncThunk('movies/getMovies', async () => {
+  export const getNowPlaying = createAsyncThunk('movies/getMovies', async () => {
     const API_KEY = "c368a12c060c2bbd33ea2c9aea9366e6"
     try{
         const res = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}`);
@@ -18,18 +18,18 @@ const initialState = {
   
   
   export const postSlice = createSlice({
-    name: 'movies',
+    name: 'nowPlaying',
     initialState,
     reducers: {},
     extraReducers: {
-        [getMovies.pending]: (state) => {
+        [getNowPlaying.pending]: (state) => {
           state.loading = true
         },
-        [getMovies.fulfilled]: (state, { payload }) => {
+        [getNowPlaying.fulfilled]: (state, { payload }) => {
           state.loading = false
-          state.movies = payload
+          state.nowplaying = payload
         },
-        [getMovies.rejected]: (state) => {
+        [getNowPlaying.rejected]: (state) => {
           state.loading = false
         },
     },

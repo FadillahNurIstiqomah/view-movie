@@ -12,36 +12,39 @@ import Header from "../components/Header"
 import Footer from '../components/Footer'
 import { getMovies } from "../stores/movieSlice"
 import { getGenres } from "../stores/genreSlice"
+import { getNowPlaying } from "../stores/nowPlaying"
 
 export default function Homepage (){
 
   const dispatch = useDispatch()
-  const { movies } = useSelector((state) => state.movies)
+  // const { movies } = useSelector((state) => state.movies)
   const { genres } = useSelector((state) => state.genres)
+  const { nowplaying } = useSelector((state) => state.nowPlaying)
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    dispatch(getMovies())
+    // dispatch(getMovies())
+    dispatch(getNowPlaying())
     dispatch(getGenres())
   }, [])
 
 
   return (
-    <div>
+    <div style={{backgroundColor: '#171715'}}>
       <Header/>
       <div style={{display: 'flex'}}>
-        <h4 className='popular'>Popular Movie</h4>
+        <h4 className='popular text-white'>Now Playing</h4>
         <button className="btn-seeAll" onClick={() => navigate(`/movies`)}>
           See All Movie <span><FontAwesomeIcon icon={faArrowRight}/></span>
         </button>
       </div>
       <Swiper
-        slidesPerView={4}
+        slidesPerView={6}
         className="mySwiper"
         style={{margin: '1rem 3rem 4rem 4rem'}}
       >
-        {movies.map((movie) => (
+        {nowplaying.map((movie) => (
           <SwiperSlide>
             <MovieCard
               key={movie.id}
@@ -52,8 +55,8 @@ export default function Homepage (){
         ))}
       </Swiper>
       <div style={{display: 'flex'}}>
-        <h5 className='popular'>Browse by Category</h5>
-        <button className="btn-seeAll" onClick={() => navigate(`/movies`)} style={{marginLeft:'64rem'}}>
+        <h5 className='popular text-white'>Browse by Category</h5>
+        <button className="btn-seeAll" onClick={() => navigate(`/movies`)} style={{marginLeft:'58rem'}}>
           See All Movie <span><FontAwesomeIcon icon={faArrowRight}/></span>
         </button>
       </div>
@@ -72,7 +75,7 @@ export default function Homepage (){
             ))}
             </div>
       </Swiper>
-      <Swiper
+      {/* <Swiper
         slidesPerView={4}
         className="mySwiper"
         style={{margin: '1rem 3rem 4rem 4rem'}}
@@ -86,7 +89,7 @@ export default function Homepage (){
             />
           </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper> */}
       <Footer/>
     </div>
   );
