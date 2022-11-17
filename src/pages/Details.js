@@ -30,7 +30,7 @@ export const Details = () => {
                         </div>
                         <div className='col-md-8'>
                             <div className="text-detail">
-                                <h1 className='text-white'>{details.title}</h1>
+                                <h1 className='text-white details-title'>{details.title}</h1>
                                 <div className='genre_item'>
                                     {details.genres && details.genres.map((e) => {
                                         return (

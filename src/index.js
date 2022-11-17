@@ -9,6 +9,7 @@ import Homepage from './pages/Homepage'
 import { AllMovies } from './pages/AllMovies';
 import Search from './pages/Search';
 import Genre from './pages/Genre';
+import Profile from './pages/Profile';
 import { store } from './stores/store'
 import { Provider } from 'react-redux'
 // import { CategoryPage } from './components/CategoryPage';
@@ -26,6 +27,7 @@ root.render(
             <Route path="/search/:name" element={<Search />}></Route>
             <Route path="/genres/" element={<Genre />} />
             <Route path="/genres/:genre" element={<Genre />} />
+            <Route path="/profile" element={<Profile />} />
             {/* <Route path="/genre/:name" element={<CategoryPage />}></Route> */}
             {/* <Route path="movies/:type" element={<MovieList />}></Route>
             <Route path="/*" element={<h1>Error Page</h1>}></Route> */}

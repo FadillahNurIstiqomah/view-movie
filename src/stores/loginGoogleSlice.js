@@ -51,6 +51,7 @@ export const getLoginGoogle = createAsyncThunk('movies/getLoginGoogle', async ()
     localStorage.setItem("user", JSON.stringify(user.accessToken));
     localStorage.setItem("image", JSON.stringify(user.providerData[0].photoURL));
     localStorage.setItem("displayName", JSON.stringify(user.providerData[0].displayName));
+    localStorage.setItem("email", JSON.stringify(user.providerData[0].email));
 
     window.location.reload(1);
     return user.providerData;

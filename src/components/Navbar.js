@@ -2,13 +2,11 @@ import React, {useState, useEffect} from "react"
 import { useDispatch} from 'react-redux'
 import '../App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faEnvelope, faUser, faUserCircle} from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faEnvelope, faUser} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate} from "react-router-dom"
-import { Button, Modal, Form, Input, Dropdown, Menu, Space } from 'antd'
+import { Button, Modal, Form, Input} from 'antd'
+import ava from '../img/profile_picture.png'
 import 'antd/dist/antd.css'
-import Swal from 'sweetalert2'
-// import ava from '../img/profile_picture.png'
-// import logo from '../img/logo.png'
 import { getLogin } from "../stores/loginSlice"
 import { getRegister } from "../stores/registerSlice"
 import { getLoginGoogle } from "../stores/loginGoogleSlice"
@@ -19,8 +17,7 @@ const HeaderNavbar = () => {
     const [isRegisterOpen, setisRegisterOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [login, setLogin] = useState(false);
-    const [user,setUser] = useState();
-    // const [user,  setUser, loading, error] = useAuthState(auth);
+    const [setUser] = useState();
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -28,12 +25,9 @@ const HeaderNavbar = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
-    // const [lastname, setLastname] = useState("");
-    // const [passwordConf, setPasswordConf] = useState("");
 
     let token = localStorage.getItem("user")
     let image = localStorage.getItem("image")
-    let displayName = localStorage.getItem("displayName")
 
 
     //Modal Search
@@ -50,10 +44,12 @@ const HeaderNavbar = () => {
         setLogin(true);
         setUser(JSON.parse(localStorage.getItem("login_data")));
     }
+
     // Login
     const showLogin = () =>{
       setisLoginOpen(true)
       setSearchOpen(false)
+      setisRegisterOpen(false)
     };
     const handleCancelLogin = () => setisLoginOpen(false);
     const handleSubmitLogin = async () => {
@@ -63,47 +59,17 @@ const HeaderNavbar = () => {
         setUser(JSON.parse(localStorage.getItem("login_data")));
     };
 
-    //Logout
-    const handleLogout = () => {
-        Swal.fire({
-          title: "Do you want to Log Out?",
-          showDenyButton: true,
-          confirmButtonText: "Yes",
-          denyButtonText: `No`,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            setTimeout(function () {
-              window.location.reload(1);
-            }, 2000);
-            localStorage.clear();
-          } else if (result.isDenied) {
-            Swal.fire("Log Out Failed!", "", "info");
-          }
-        });
-    };
-    
-
     // Register
-    const showRegister = () => setisRegisterOpen(true);
+    const showRegister = () => {
+      setisRegisterOpen(true)
+      setisLoginOpen(false)
+    }
     const handleCancelRegister = () => setisRegisterOpen(false);
     const handleSubmitRegister = async () => {
         dispatch(getRegister({name, email, password}))
         setisRegisterOpen(false)
         setisLoginOpen(true);
     };
-
-    //Dropdown Menu
-    const menu = (
-        <Menu
-            style={{width: '8rem', marginLeft:'19rem'}}
-          items={[
-            {
-              label: <a onClick={handleLogout}>Logout</a>,
-              key: '0',
-            },
-          ]}
-        />
-    );
 
     //Search
     const submit = (e) => {
@@ -115,8 +81,6 @@ const HeaderNavbar = () => {
     useEffect(() => {
         setLogin(JSON.parse(localStorage.getItem("login_data")));
         setLogin(true);
-        const user = JSON.parse(localStorage.getItem("login_data"));
-        // setUser(user);
     }, [login]);
 
     return(
@@ -137,11 +101,10 @@ const HeaderNavbar = () => {
                       </li>
                   </ul>
                 </div>
-                <div className='d-flex gap-2'>
-                  <button className='button-search' onClick={showSearch}>
+                <button className='button-search ml-6' onClick={showSearch}>
                     <i className='fa fa-search fa-lg'></i>
-                  </button>
-                  <Modal
+                </button>
+                <Modal
                     open={searchOpen}
                     title="Search Movie"
                     onCancel={handleCancel}
@@ -158,35 +121,55 @@ const HeaderNavbar = () => {
                         <FontAwesomeIcon onClick={submit} icon={faSearch} className='icon-search'/>
                     </form>
                   </Modal>
-                  {/* <a onClick={showLogin}>
-                    <i className='fas fa-sharp fa-solid fa-circle-user fa-xl text-light mr-4'></i>
-                  </a> */}
+                {/* After Login */}
+                {token && login && token.length ? (
+                  <div style={{display: 'flex', gap: '1rem'}} onClick={() => navigate(`/profile`)}>
+                    {image !== null ? (
+                      <img
+                        src={JSON.parse(image)}
+                        alt=""
+                        className="img-ava"
+                      />
+                      ) : (
+                        <img src={ava} alt="" className="img-ava"/>
+                      )}
+                  </div>
+                ) : (
+                <div className='d-flex gap-2'>
+
                   <button className='button-login' onClick={showLogin}>Sign In</button>
                   <Modal
                     open={isLoginOpen}
                     title="Log In to Your Account"
                     onCancel={handleCancelLogin}
                     footer={[
-                      <div className="login_modal">
-                          <Button
-                            type="submit"
-                            onClick={handleSubmitLogin}
-                            htmlType="submit" 
-                            className="login-form-button text-white"
-                            style={{backgroundColor:'#e7394b', marginRight:'26rem', borderRadius: '30px', alignContent: 'center'}}
-                          >
-                            Login
-                          </Button>
-                          <Button
-                            type="submit"
-                            onClick={signInWithGoogle}
-                            htmlType="submit" 
-                            className="login-form-button text-white"
-                            style={{backgroundColor:'#e7394b', marginLeft:'-25.5rem', borderRadius: '30px', alignContent: 'center'}}
-                          >
-                            Login with Google
-                          </Button>
+                      <div>
+                        <div className="login_modal">
+                            <Button
+                              type="submit"
+                              onClick={handleSubmitLogin}
+                              htmlType="submit" 
+                              className="login-form-button text-white"
+                              style={{backgroundColor:'#e7394b', marginRight:'26rem', borderRadius: '30px', alignContent: 'center'}}
+                            >
+                              Login
+                            </Button>
+                            <Button
+                              type="submit"
+                              onClick={signInWithGoogle}
+                              htmlType="submit" 
+                              className="login-form-button text-white"
+                              style={{backgroundColor:'#e7394b', marginLeft:'-25.5rem', borderRadius: '30px', alignContent: 'center'}}
+                            >
+                              Login with Google
+                            </Button>
+                        </div>
+                        <div className="register">
+                          <h6>Create New Account?</h6>
+                          <p className="btn-register" onClick={showRegister}>Register</p>
+                        </div>
                       </div>
+
                     ]}
                   >
                     <Form
@@ -234,7 +217,86 @@ const HeaderNavbar = () => {
                       </Form.Item>
                     </Form>
                   </Modal>
+
+                  {/* Register */}
+                  <Modal
+                    open={isRegisterOpen}
+                    title="Create Account"
+                    onCancel={handleCancelRegister}
+                    footer={[
+                      <div>
+                        <Button 
+                          key="submit" 
+                          style={{backgroundColor:'#e7394b', marginRight:'23rem', marginBottom:'1rem',borderRadius: '30px'}}
+                          className='text-white'
+                          onClick={handleSubmitRegister}
+                        >
+                          Register Now
+                        </Button>
+                        <div className="register">
+                          <h6>Already have an account?</h6>
+                          <p className="btn-register" onClick={showLogin}>Login</p>
+                        </div>
+                      </div>
+                    ]}
+                  >
+                    <Form
+                      name="basic"
+                      wrapperCol={{span: 25}}
+                      style={{marginBottom:'-2rem'}}
+                    >
+                      <Form.Item
+                        name="name"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Please input your firstname!',
+                          },
+                        ]}
+                      >
+                        <Input 
+                          placeholder="Name" 
+                          style={{borderRadius: '30px'}}
+                          suffix={<FontAwesomeIcon icon={faUser}/>}
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                      </Form.Item>
+                      <Form.Item
+                        name="email"
+                        rules={[
+                          {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                          },
+                          {
+                            required: true,
+                            message: 'Please input your E-mail!',
+                          },
+                        ]}
+                      >
+                        <Input 
+                          placeholder="Email Address" 
+                          style={{borderRadius: '30px'}}
+                          suffix={<FontAwesomeIcon icon={faEnvelope}/>}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </Form.Item>
+                      <Form.Item
+                        name="password"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Please input your password!',
+                          },
+                        ]}
+                        hasFeedback
+                      >
+                        <Input.Password placeholder="Password" style={{borderRadius: '30px'}} onChange={(e) => setPassword(e.target.value)}/>
+                      </Form.Item>
+                    </Form>
+                  </Modal>
                 </div>
+              )}
             </div>
         </nav>
       </div>

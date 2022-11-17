@@ -31,6 +31,7 @@ const auth = getAuth(app);
       localStorage.setItem("user", JSON.stringify(res.user.accessToken));
       localStorage.setItem("image", JSON.stringify(res.user.providerData[0].photoURL));
       localStorage.setItem("displayName", JSON.stringify(res.user.providerData[0].displayName));
+      localStorage.setItem("email", JSON.stringify(res.user.providerData[0].email));
 
       window.location.reload(1);
     } catch (err) {
