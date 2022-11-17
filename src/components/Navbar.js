@@ -161,7 +161,7 @@ const HeaderNavbar = () => {
                   {/* <a onClick={showLogin}>
                     <i className='fas fa-sharp fa-solid fa-circle-user fa-xl text-light mr-4'></i>
                   </a> */}
-                  <button className='button-login' onClick={showLogin}><i className='fas fa-sharp fa-solid fa-circle-user fa-xl text-light'></i></button>
+                  <button className='button-login' onClick={showLogin}>Sign In</button>
                   <Modal
                     open={isLoginOpen}
                     title="Log In to Your Account"

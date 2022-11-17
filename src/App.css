@@ -32,7 +32,7 @@ nav {
     background-color: rgba(61, 61, 61, 0.52);
     border-radius: 30px;
     color: white;
-    /* width: 5rem; */
+    width: 4rem;
     border: none;
 }
 .button-login:hover{
