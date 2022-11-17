@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import movie from '../stores/movieSlice'
-import nowplaying from '../stores/nowPlaying'
 import genre from '../stores/genreSlice'
 import search from '../stores/searchSlice'
 import detail from '../stores/detailSlice'
@@ -16,7 +15,6 @@ export const store = configureStore({
         regist: register,
         loginGoogle: logingoogle,
         movies: movie,
-        nowPlaying: nowplaying,
         genres: genre,
         movieDetails: detail,
         movieCast: cast,

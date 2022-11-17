@@ -20,29 +20,50 @@ export const Details = () => {
     }, [])
 
     return (
-        <div>
+        <div style={{backgroundColor: '#171715'}}>
             <HeaderNavbar/>
             {details&&
                 <div>
-                    <img src={IMAGE_PATH + details.backdrop_path || details.profile_path} style={{width: '100%', height: '95vh'}} className='image-popular' alt={details.title}></img>
-                    <div className="text-detail">
-                        <h1 className='text-white'>{details.title}</h1>
-                        <div className='genre_item'>
-                            {details.genres && details.genres.map((e) => {
-                                return (
-                                    <p>{e.name}</p>
-                                )})
-                            }
+                    <div className='row mx-auto'>
+                        <div className='col-md-4'>
+                            <img src={IMAGE_PATH + details.poster_path} className='image-details' alt={details.title}></img>
                         </div>
-                        <p style={{width:'50%'}}>{details.overview}</p>
-                        <div className="vote_average">
-                            <FontAwesomeIcon icon={faStar} style={{fontSize: 20, color: '#e69b00'}}/>
-                            <p>{Number(details.vote_average).toFixed(1)} / 10 </p>
-                        </div>
-                        <div>
-                            <a href = {`https://www.youtube.com/results?search_query=${details.title}`}>
-                                <button className='button-watch'><span style={{marginRight: '0.5rem'}}><FontAwesomeIcon icon={faCirclePlay}/></span>WATCH TRAILER</button>
-                            </a>
+                        <div className='col-md-8'>
+                            <div className="text-detail">
+                                <h1 className='text-white'>{details.title}</h1>
+                                <div className='genre_item'>
+                                    {details.genres && details.genres.map((e) => {
+                                        return (
+                                            <p>{e.name}</p>
+                                        )})
+                                    }
+                                </div>
+                                <div className="vote_average">
+                                    <FontAwesomeIcon icon={faStar} style={{fontSize: 20, color: '#e69b00'}}/>
+                                    <p>{Number(details.vote_average).toFixed(1)} / 10 </p>
+                                </div>
+                                <div>
+                                    <h5 className='text-white'>Synopsis</h5>
+                                    <p className='details-overview'>{details.overview}</p>
+                                </div>
+                                <div className='text-white'>
+                                    <h5 className='text-white'>Release Date</h5>
+                                    <p>{details.release_date}</p>
+                                </div>
+                                <div className='text-white'>
+                                    <h5 className='text-white'>Country</h5>
+                                    {details.production_countries && details.production_countries.map((e) => {
+                                        return (
+                                            <p>{e.name}</p>
+                                        )})
+                                    }
+                                </div>
+                                <div>
+                                    <a href = {`https://www.youtube.com/results?search_query=${details.title}`}>
+                                        <button className='button-watch'><span style={{marginRight: '0.5rem'}}><FontAwesomeIcon icon={faCirclePlay}/></span>WATCH TRAILER</button>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

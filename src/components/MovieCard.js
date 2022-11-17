@@ -10,11 +10,18 @@ const MovieCard = ({movie}) => {
     const navigate = useNavigate()
 
     return (
-        <div onClick={() => navigate(`/movie/${movie.id}`)} className={"movie"}>
-            <div className="movie-title">
+        <div onClick={() => navigate(`/movie/${movie.id}`)}>
+            <div className="card movie-card mx-auto">
                 {movie.poster_path &&
-                <img src={IMAGE_PATH + movie.poster_path} alt={movie.title}/>
+                    <img src={IMAGE_PATH + movie.poster_path} alt={movie.title} className='movie-poster mx-auto mt-3'/>
                 }
+                ,<div className="ml-3">
+                    <h6 className="text-white title_card">{movie.title}</h6>
+                    <div className="vote_average mt-4">
+                        <FontAwesomeIcon icon={faStar} style={{fontSize: 16, color: '#e69b00'}}/>
+                        <p>{Number(movie.vote_average).toFixed(1)} / 10 </p>
+                    </div>
+                </div>
             </div>
         </div>
         // <div>

@@ -17,15 +17,9 @@ export const AllMovies = () => {
     },[])
 
     return (
-        <div>
+        <div style={{backgroundColor: '#171715'}}>
             <HeaderNavbar />
-                <div>
-                    <img src='https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1631&q=80' 
-                    style={{width: '100vw', height: '50vh'}} className='image-details' alt='gambar'></img>
-                    <div style={{marginTop:'-200px', marginLeft:'2rem'}}>
-                        <h1 className='text-white'>All Movies</h1>
-                    </div>
-                </div>
+            <h3 className='AllMovies-Text'>Top Rated Movie</h3>
                 <div className='All-movies'>
                     {movies.map((movie) => (
                         <MovieCard

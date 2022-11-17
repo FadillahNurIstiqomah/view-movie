@@ -1,14 +1,11 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Card } from 'antd';
 import '../App.css'
 import { useParams } from 'react-router-dom'
-import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import "swiper/css/pagination"
 import { getMovieCast } from '../stores/castSlice'
 
-const { Meta } = Card;
 
 export const DetailCast = () => {
     const IMAGE_PATH = "https://image.tmdb.org/t/p/w342"
@@ -22,34 +19,34 @@ export const DetailCast = () => {
 
     return (
         <div>
-            <h3 className='popular'>Cast</h3>
-            <Swiper
-                slidesPerView={5}
-                className="mySwiper"
-                style={{margin: '0 3rem 4rem 4rem'}}
-            >
-                {cast.map((movie) => {
+            <div style={{display: 'flex'}}>
+                <h3 className='popular mx-auto mb-2 mt-2 p-4'>Movie Cast</h3>
+            </div>
+            <div className='All-movies'>
+            {cast.map((movie) => {
                     if (movie.profile_path !== null) {
                         return (
-                            <SwiperSlide>
-                                <div className="movie-title">
-                                    {movie.profile_path &&
-                                        <Card
-                                            hoverable
-                                            style={{
-                                            width: 240,
-                                            }}
-                                            cover={<img alt={movie.name} src={IMAGE_PATH + movie.profile_path} />}
-                                        >
-                                            <Meta title={movie.name} description={movie.character} />
-                                        </Card>
-                                    }
+                            <div className="card card-cast mx-auto">
+                                {movie.profile_path &&
+                                    <img src={IMAGE_PATH + movie.profile_path} alt={movie.title} className='img_cast mx-auto mt-3'/>
+                                }
+                                <div className="mx-auto p-3">
+                                    <h6 className="text-white title_card">{movie.name}</h6>
                                 </div>
-                            </SwiperSlide>
+                            </div>
+                        )
+                    } else {
+                        return(
+                            <div className="card card-cast mx-auto">
+                                <img src='https://drive.google.com/uc?export=view&id=1n7mAJr5VOR7W3FyBiss-muB-5R76PSxB' alt={movie.title} className='img_cast mx-auto mt-3'/>
+                                <div className="mx-auto p-3">
+                                    <h6 className="text-white title_card">{movie.name}</h6>
+                                </div>
+                            </div>
                         )
                     }
                 })}
-            </Swiper>
+            </div>
         </div>
     )
 }

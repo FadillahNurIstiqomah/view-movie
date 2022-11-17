@@ -1,16 +1,20 @@
 import React, { useEffect } from "react";
-import {useParams, useNavigate} from "react-router-dom";
+import {useParams, useNavigate, Link} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import HeaderNavbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { getMovieGenre } from "../stores/genrePage"
 import { getGenres } from "../stores/genreSlice"
 import MovieCard from '../components/MovieCard'
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
+import "swiper/css/pagination"
 import '../App.css'
 
 export default function Genres () {
   const {genre} = useParams()
   const navigate = useNavigate()
+  // const router = useRouter();
   const dispatch = useDispatch()
   const { genrePage } = useSelector((state) => state.genrePages)
   const { genres } = useSelector((state) => state.genres)
@@ -21,19 +25,53 @@ export default function Genres () {
   }, []);
 
   return (
-    <div>
+    <div style={{backgroundColor: '#171715'}}>
         <HeaderNavbar />
-        <img  src='https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1631&q=80' 
-            style={{width: '100vw', height: '50vh'}} className='image-details' alt='gambar'></img>
-        <div style={{marginTop:'-200px', marginLeft:'2rem'}}>
-            <h1 className='text-white'>Genre: {genre}</h1>
+        {/* <div style={{display: 'flex'}}>
+          <h5 className='popular'>Browse by Category</h5>
+          <button className="btn-seeAll" onClick={() => navigate(`/movies`)} style={{marginLeft:'64rem'}}>
+            See All Movie <span><FontAwesomeIcon icon={faArrowRight}/></span>
+          </button>
         </div>
-        <div className='search-result' style={{marginTop:'13rem'}}>
+          <Swiper
+                slidesPerView={8}
+                className="mySwiper"
+                style={{margin: '1rem 2rem 1rem 4rem'}}
+            >
+                <div className="movie-popular">
+                {genres.map((genre) => (
+                    <SwiperSlide>
+                        <Link to={`/genres/${genre.name}`}>
+                          <button className="genre_list">{genre.name}</button>
+                        </Link>
+                    </SwiperSlide>
+                ))}
+                </div>
+          </Swiper> */}
+          <div className="row" style={{margin: '5rem 3rem'}}>
+            <div className="col-md-2">
+              <h2 className="text-white">Genres</h2>
+              <div>
+                {genres.map((e) => {
+                  return (
+                    <div
+                      onClick={() => navigate(`/genres/${e.name}`)}
+                    >
+                      <button className="button-genre">{e.name}</button>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="col-md-9">
+            <div style={{ marginLeft:'2rem'}}>
+            <h1 className='text-white'>{genre}</h1>
+        </div>
+        <div className='search-result'>
             {genrePage.map((movie) => {
               if (movie.poster_path !== null) {
                 return (
-                  <div onClick={() => navigate(`/movie/${movie.id}`)} className={"movie"}>
-                    
+                  <div onClick={() => navigate(`/movie/${movie.id}`)}>
                       <MovieCard
                         key={movie._id}
                         movie={movie}
@@ -44,6 +82,8 @@ export default function Genres () {
             })}
   
         </div>
+            </div>
+          </div>
         <Footer/>
     </div>
   );
