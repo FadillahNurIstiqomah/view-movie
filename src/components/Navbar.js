@@ -97,7 +97,7 @@ const HeaderNavbar = () => {
                           <button className="nav-link nav-button active" aria-current="page" onClick={() => navigate(`/`)}>Home</button>
                       </li>
                       <li className="nav-item">
-                          <button className="nav-link nav-button active" aria-current="page">Genres</button>
+                          <button className="nav-link nav-button active" aria-current="page" onClick={() => navigate(`/genres`)}>Genres</button>
                       </li>
                   </ul>
                 </div>

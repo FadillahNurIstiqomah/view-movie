@@ -1,13 +1,10 @@
 import React, { useEffect }  from "react"
 import { useDispatch, useSelector } from 'react-redux'
-import {useNavigate, Link} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import '../App.css'
 import Carousel from 'react-bootstrap/Carousel'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlay, faStar} from '@fortawesome/free-solid-svg-icons'
-import c1 from '../img/c1.jpg'
-import c2 from '../img/c2.jpg'
-import c3 from '../img/c3.jpg'
 import HeaderNavbar from "./Navbar"
 import { getMovies } from "../stores/movieSlice"
 

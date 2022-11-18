@@ -5,6 +5,7 @@ import HeaderNavbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { getMovieGenre } from "../stores/genrePage"
 import { getGenres } from "../stores/genreSlice"
+import { getMovies } from "../stores/movieSlice"
 import MovieCard from '../components/MovieCard'
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
@@ -17,72 +18,55 @@ export default function Genres () {
   // const router = useRouter();
   const dispatch = useDispatch()
   const { genrePage } = useSelector((state) => state.genrePages)
+  const { movies } = useSelector((state) => state.movies)
   const { genres } = useSelector((state) => state.genres)
 
   useEffect(() => {
     dispatch(getMovieGenre(genre))
     dispatch(getGenres())
+    dispatch(getMovies())
   }, []);
 
   return (
     <div style={{backgroundColor: '#171715'}}>
         <HeaderNavbar />
-        {/* <div style={{display: 'flex'}}>
-          <h5 className='popular'>Browse by Category</h5>
-          <button className="btn-seeAll" onClick={() => navigate(`/movies`)} style={{marginLeft:'64rem'}}>
-            See All Movie <span><FontAwesomeIcon icon={faArrowRight}/></span>
-          </button>
-        </div>
+          <h3 className="genre-header">Browse by Genre Movie</h3>
           <Swiper
-                slidesPerView={8}
+                breakpoints={{
+                  1008: {
+                    slidesPerView: 8,
+                  },
+                  390: {
+                    slidesPerView: 2,
+                  },
+                }}
+                // slidesPerView={8}
                 className="mySwiper"
-                style={{margin: '1rem 2rem 1rem 4rem'}}
+                style={{margin: '2rem 3rem'}}
             >
                 <div className="movie-popular">
                 {genres.map((genre) => (
                     <SwiperSlide>
                         <Link to={`/genres/${genre.name}`}>
-                          <button className="genre_list">{genre.name}</button>
+                          <button className="genre_list" onClick={'#genre-result'}>{genre.name}</button>
                         </Link>
                     </SwiperSlide>
                 ))}
                 </div>
-          </Swiper> */}
-          <div className="row" style={{margin: '5rem 3rem'}}>
-            <div className="col-md-2">
-              <h2 className="text-white">Genres</h2>
-              <div>
-                {genres.map((e) => {
+          </Swiper>
+          <div className='All-movies'>
+              {genrePage.map((movie) => {
+                if (movie.poster_path !== null) {
                   return (
-                    <div
-                      onClick={() => navigate(`/genres/${e.name}`)}
-                    >
-                      <button className="button-genre">{e.name}</button>
+                    <div onClick={() => navigate(`/movie/${movie.id}`)} id='genre-result'>
+                        <MovieCard
+                          key={movie._id}
+                          movie={movie}
+                          onClick={() => navigate(`/${movie.title}`)}
+                        />
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="col-md-9">
-            <div style={{ marginLeft:'2rem'}}>
-            <h1 className='text-white'>{genre}</h1>
-        </div>
-        <div className='search-result'>
-            {genrePage.map((movie) => {
-              if (movie.poster_path !== null) {
-                return (
-                  <div onClick={() => navigate(`/movie/${movie.id}`)}>
-                      <MovieCard
-                        key={movie._id}
-                        movie={movie}
-                        onClick={() => navigate(`/${movie.title}`)}
-                      />
-                  </div>
-              )}
-            })}
-  
-        </div>
-            </div>
+                )}
+              })}
           </div>
         <Footer/>
     </div>

@@ -20,7 +20,7 @@ export default function Search() {
         <div style={{backgroundColor: '#171715'}}>
             <HeaderNavbar />
                 <div>
-                    <h2 className='AllMovies-Text'>Search Result "{name}"</h2>
+                    <h2 className='genre-header'>Search Result "{name}"</h2>
                     <div className='All-movies'>
                         {search && search.map((movie) => {
                             if (movie.poster_path !== null) {
