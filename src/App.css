@@ -299,7 +299,7 @@ nav {
     color: white;
 }
 .logo_socmed a:hover {
-    color: burlywood;
+    color: red;
 }
 .footer_text{
     display: flex;
@@ -313,7 +313,7 @@ nav {
     color: white;
 }
 .footer_text a:hover {
-    color: burlywood;
+    color: red;
 }
 
 @media screen AND (max-width: 600px) {
