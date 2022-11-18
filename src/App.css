@@ -8,9 +8,16 @@ nav {
     width: 100%;
     position: absolute;
 }
+.navbar-brand {
+    background-color: transparent;
+    border: none;
+}
 .nav-button{
     background-color: transparent;
     border: none;
+}
+.nav-button:hover{
+    background-color: red;
 }
 .button-search{
     background-color: rgba(61, 61, 61, 0.52);
@@ -37,7 +44,7 @@ nav {
     background-color:red;
 }
 .register{
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     display: flex;
 }
 .btn-register{

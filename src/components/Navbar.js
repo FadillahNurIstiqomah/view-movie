@@ -90,7 +90,7 @@ const HeaderNavbar = () => {
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
-                <button className="navbar-brand nav-button" onClick={() => navigate(`/`)} style={{color: 'red', fontSize: '1.5rem'}}><strong>VIEW</strong></button>
+                <button className="navbar-brand" onClick={() => navigate(`/`)} style={{color: 'red', fontSize: '1.5rem'}}><strong>VIEW</strong></button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                   <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                       <li className="nav-item">
